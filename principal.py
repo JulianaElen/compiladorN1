@@ -1,4 +1,3 @@
-
 import ply.lex as lex
 import ply.yacc as yacc
 
@@ -49,8 +48,8 @@ reserved = {
     'break': 'BREAK',
     'print': 'PRINT',
     'read': 'READ',
-    'True': 'TRUE',
-    'False': 'FALSE'
+    'true': 'TRUE',
+    'false': 'FALSE'
 }
 
 tokens = tokens + list(reserved.values())
@@ -257,10 +256,13 @@ def p_field(p):
         p[0] = (p[1], p[2], p[3])
     else:
         p[0] = p[2]
-    
+
+def p_boolean(p):
+    '''boolean : join
+               | join OR join'''
 def p_boolean(p):
     '''boolean : join boolean_aux'''
-    p[0] = ('booleano', p[1], p[2])
+    p[0] = ('boolean', p[1], p[2])
 
 def p_boolean_aux(p):
     '''boolean_aux : OR join boolean_aux
@@ -373,6 +375,14 @@ def test_parser(data):
     result = parser.parse(data)
     return result
 
+def test_lexer(data):
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print(tok)
+
 # Função para realizar a entrada de dados
 def input_data():
     print("Por favor, insira seu código linha por linha.")
@@ -391,6 +401,8 @@ def main():
     data = input_data()
     result = test_parser(data)
     print(result)
+    
+    print(test_lexer(data))
 
 if __name__ == "__main__":
     main()

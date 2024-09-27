@@ -174,7 +174,7 @@ def p_statements(p):
     '''statements : statement statements
                   | empty'''
     if len(p) == 3:
-        p[0] = [p[1]] + p[2]
+        p[0] = ([p[1]], p[2])
     else:
         p[0] = None
 
@@ -188,7 +188,7 @@ def p_statement(p):
                  | read
                  | block'''
     if len(p) == 5:  
-        p[0] = ('assign', p[1], p[3]) 
+        p[0] = ('=', p[1], p[3]) 
     elif len(p) == 2:  
         p[0] = p[1]  
     elif len(p) == 4: 
@@ -236,10 +236,7 @@ def p_local_aux(p):
     '''local_aux : offset
                    | field
                    | empty'''
-    if p[1] is None:
-        p[0] = None 
-    else:
-        p[0] = p[1]
+    p[0] = p[1]
 
 def p_offset(p):
     '''offset : LBRACK boolean RBRACK offset
@@ -259,47 +256,36 @@ def p_field(p):
 
 def p_boolean(p):
     '''boolean : join
-               | join OR join'''
-def p_boolean(p):
-    '''boolean : join boolean_aux'''
-    p[0] = ('boolean', p[1], p[2])
-
-def p_boolean_aux(p):
-    '''boolean_aux : OR join boolean_aux
-                   | empty'''
-    if len(p) == 4:
-        p[0] = ('or', p[2], p[3])
-    else:
-            p[0] = None
+               | boolean OR join'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else: 
+        p[0] = ('or', p[1], p[3])
 
 def p_join(p):
-    '''join : equality join_aux'''
-    p[0] = ('join', p[1], p[2])
-
-def p_join_aux(p):
-    '''join_aux : AND equality join_aux
-                | empty'''
-    if len(p) == 4: 
-        p[0] = ('and', p[2], p[3])
-    else:
-        p[0] = None
+    '''join : equality
+            | join AND equality '''
+    if len(p) == 2:
+        p[0] = p[1]
+    else: 
+        p[0] = ('and', p[1], p[3])
 
 def p_equality(p):
-    '''equality : relational equality_aux'''
-    p[0] = (p[1], p[2])
-
-def p_equality_aux(p):
-    '''equality_aux : EQ relational equality_aux
-                    | NEQ relational equality_aux
-                    | empty'''
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = None 
+    '''equality : relational 
+                | equality EQ relational
+                | equality NEQ relational'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else: 
+        p[0] = (p[2], p[1], p[3]) 
 
 def p_relational(p):
-    '''relational : expression relational_operator expression'''
-    p[0] = (p[1], p[2], p[3])
+    '''relational : expression 
+                  | relational_operator expression'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = (p[1], p[2])
 
 def p_relational_operator(p):
     '''relational_operator : LT
@@ -326,17 +312,13 @@ def p_expression_operator(p):
     p[0] = p[1]
 
 def p_term(p):
-    '''term : unary term_aux'''
-    p[0] = (p[1], p[2])
-
-def p_term_aux(p):
-    '''term_aux : TIMES unary term_aux 
-                | DIVIDE unary term_aux
-                | empty'''
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = None
+    '''term : unary
+            | term TIMES unary
+            | term DIVIDE unary'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else: 
+        p[0] = (p[2], p[1], p[3])
 
 def p_unary(p):
     '''unary : NOT unary
@@ -375,13 +357,13 @@ def test_parser(data):
     result = parser.parse(data)
     return result
 
-def test_lexer(data):
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        print(tok)
+# def test_lexer(data):
+#     lexer.input(data)
+#     while True:
+#         tok = lexer.token()
+#         if not tok:
+#             break
+#         print(tok)
 
 # Função para realizar a entrada de dados
 def input_data():
@@ -402,7 +384,7 @@ def main():
     result = test_parser(data)
     print(result)
     
-    print(test_lexer(data))
+    # print(test_lexer(data))
 
 if __name__ == "__main__":
     main()

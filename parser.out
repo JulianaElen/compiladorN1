@@ -42,82 +42,79 @@ Rule 36    offset -> LBRACK boolean RBRACK offset
 Rule 37    offset -> empty
 Rule 38    field -> DOT factor field
 Rule 39    field -> DOT factor
-Rule 40    boolean -> join boolean_aux
-Rule 41    boolean_aux -> OR join boolean_aux
-Rule 42    boolean_aux -> empty
-Rule 43    join -> equality join_aux
-Rule 44    join_aux -> AND equality join_aux
-Rule 45    join_aux -> empty
-Rule 46    equality -> relational equality_aux
-Rule 47    equality_aux -> EQ relational equality_aux
-Rule 48    equality_aux -> NEQ relational equality_aux
-Rule 49    equality_aux -> empty
-Rule 50    relational -> expression relational_operator expression
-Rule 51    relational_operator -> LT
-Rule 52    relational_operator -> LE
-Rule 53    relational_operator -> GT
-Rule 54    relational_operator -> GE
-Rule 55    expression -> term expression_aux
-Rule 56    expression_aux -> expression_operator term expression_aux
-Rule 57    expression_aux -> empty
-Rule 58    expression_operator -> PLUS
-Rule 59    expression_operator -> MINUS
-Rule 60    term -> unary term_aux
-Rule 61    term_aux -> TIMES unary term_aux
-Rule 62    term_aux -> DIVIDE unary term_aux
-Rule 63    term_aux -> empty
-Rule 64    unary -> NOT unary
-Rule 65    unary -> NEG unary
-Rule 66    unary -> factor
-Rule 67    factor -> LPAREN boolean RPAREN
-Rule 68    factor -> local
-Rule 69    factor -> NUMBER_INT
-Rule 70    factor -> NUMBER_FLOAT
-Rule 71    factor -> FALSE
-Rule 72    factor -> TRUE
-Rule 73    empty -> <empty>
+Rule 40    boolean -> join
+Rule 41    boolean -> boolean OR join
+Rule 42    join -> equality
+Rule 43    join -> join AND equality
+Rule 44    equality -> relational
+Rule 45    equality -> equality EQ relational
+Rule 46    equality -> equality NEQ relational
+Rule 47    relational -> expression
+Rule 48    relational -> relational_operator expression
+Rule 49    relational_operator -> LT
+Rule 50    relational_operator -> LE
+Rule 51    relational_operator -> GT
+Rule 52    relational_operator -> GE
+Rule 53    expression -> term expression_aux
+Rule 54    expression_aux -> expression_operator term expression_aux
+Rule 55    expression_aux -> empty
+Rule 56    expression_operator -> PLUS
+Rule 57    expression_operator -> MINUS
+Rule 58    term -> unary
+Rule 59    term -> term TIMES unary
+Rule 60    term -> term DIVIDE unary
+Rule 61    unary -> NOT unary
+Rule 62    unary -> NEG unary
+Rule 63    unary -> factor
+Rule 64    factor -> LPAREN boolean RPAREN
+Rule 65    factor -> local
+Rule 66    factor -> NUMBER_INT
+Rule 67    factor -> NUMBER_FLOAT
+Rule 68    factor -> FALSE
+Rule 69    factor -> TRUE
+Rule 70    empty -> <empty>
 
 Terminals, with rules where they appear
 
-AND                  : 44
+AND                  : 43
 BOOL                 : 13
 BREAK                : 20
 CHAR                 : 12
-DIVIDE               : 62
+DIVIDE               : 60
 DO                   : 30
 DOT                  : 38 39
 ELSE                 : 27
-EQ                   : 47
+EQ                   : 45
 EQUALS               : 16
-FALSE                : 71
-GE                   : 54
-GT                   : 53
+FALSE                : 68
+GE                   : 52
+GT                   : 51
 HASH                 : 6 31
 ID                   : 3 31 32
 IF                   : 26
 INT                  : 11
 LBRACE               : 2 8
 LBRACK               : 9 10 36
-LE                   : 52
-LPAREN               : 24 25 26 29 30 67
-LT                   : 51
-MINUS                : 59
-NEG                  : 65
-NEQ                  : 48
-NOT                  : 64
-NUMBER_FLOAT         : 70
-NUMBER_INT           : 9 10 69
+LE                   : 50
+LPAREN               : 24 25 26 29 30 64
+LT                   : 49
+MINUS                : 57
+NEG                  : 62
+NEQ                  : 46
+NOT                  : 61
+NUMBER_FLOAT         : 67
+NUMBER_INT           : 9 10 66
 OR                   : 41
-PLUS                 : 58
+PLUS                 : 56
 PRINT                : 24
 RBRACE               : 2 8
 RBRACK               : 9 10 36
 READ                 : 25
 RECORD               : 8
-RPAREN               : 24 25 26 29 30 67
+RPAREN               : 24 25 26 29 30 64
 SEMICOLON            : 3 16 20 24 25 30
-TIMES                : 61
-TRUE                 : 72
+TIMES                : 59
+TRUE                 : 69
 WHILE                : 29 30
 error                : 
 
@@ -125,37 +122,33 @@ Nonterminals, with rules where they appear
 
 basic                : 5 6 7
 block                : 1 23
-boolean              : 16 24 26 29 30 36 67
-boolean_aux          : 40 41
+boolean              : 16 24 26 29 30 36 41 64
 conditional          : 17
 conditional_aux      : 26
 declaration          : 2 3 8
 dimensions           : 5 9
 do_while_loop        : 19
-empty                : 4 15 28 35 37 42 45 49 57 63
-equality             : 43 44
-equality_aux         : 46 47 48
-expression           : 50 50
-expression_aux       : 55 56
-expression_operator  : 56
-factor               : 38 39 66
+empty                : 4 15 28 35 37 55
+equality             : 42 43 45 46
+expression           : 47 48
+expression_aux       : 53 54
+expression_operator  : 54
+factor               : 38 39 63
 field                : 34 38
-join                 : 40 41
-join_aux             : 43 44
-local                : 16 25 68
+join                 : 40 41 43
+local                : 16 25 65
 local_aux            : 31 32
 offset               : 33 36
 print                : 21
 program              : 0
 read                 : 22
-relational           : 46 47 48
-relational_operator  : 50
+relational           : 44 45 46
+relational_operator  : 48
 statement            : 14 26 27 29 30
 statements           : 2 14
-term                 : 55 56
-term_aux             : 60 61 62
+term                 : 53 54 59 60
 type                 : 3
-unary                : 60 61 62 64 65
+unary                : 58 59 60 61 62
 while_loop           : 18
 
 Parsing method: LALR
@@ -193,22 +186,22 @@ state 3
     (6) type -> . basic HASH
     (7) type -> . basic
     (8) type -> . RECORD LBRACE declaration RBRACE
-    (73) empty -> .
+    (70) empty -> .
     (11) basic -> . INT
     (12) basic -> . CHAR
     (13) basic -> . BOOL
 
     RECORD          shift and go to state 8
-    BREAK           reduce using rule 73 (empty -> .)
-    HASH            reduce using rule 73 (empty -> .)
-    ID              reduce using rule 73 (empty -> .)
-    IF              reduce using rule 73 (empty -> .)
-    WHILE           reduce using rule 73 (empty -> .)
-    DO              reduce using rule 73 (empty -> .)
-    PRINT           reduce using rule 73 (empty -> .)
-    READ            reduce using rule 73 (empty -> .)
-    LBRACE          reduce using rule 73 (empty -> .)
-    RBRACE          reduce using rule 73 (empty -> .)
+    BREAK           reduce using rule 70 (empty -> .)
+    HASH            reduce using rule 70 (empty -> .)
+    ID              reduce using rule 70 (empty -> .)
+    IF              reduce using rule 70 (empty -> .)
+    WHILE           reduce using rule 70 (empty -> .)
+    DO              reduce using rule 70 (empty -> .)
+    PRINT           reduce using rule 70 (empty -> .)
+    READ            reduce using rule 70 (empty -> .)
+    LBRACE          reduce using rule 70 (empty -> .)
+    RBRACE          reduce using rule 70 (empty -> .)
     INT             shift and go to state 9
     CHAR            shift and go to state 10
     BOOL            shift and go to state 11
@@ -231,7 +224,7 @@ state 4
     (21) statement -> . print
     (22) statement -> . read
     (23) statement -> . block
-    (73) empty -> .
+    (70) empty -> .
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
     (26) conditional -> . IF LPAREN boolean RPAREN statement conditional_aux
@@ -242,7 +235,7 @@ state 4
     (2) block -> . LBRACE declaration statements RBRACE
 
     BREAK           shift and go to state 19
-    RBRACE          reduce using rule 73 (empty -> .)
+    RBRACE          reduce using rule 70 (empty -> .)
     HASH            shift and go to state 23
     ID              shift and go to state 24
     IF              shift and go to state 25
@@ -354,7 +347,7 @@ state 13
     (21) statement -> . print
     (22) statement -> . read
     (23) statement -> . block
-    (73) empty -> .
+    (70) empty -> .
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
     (26) conditional -> . IF LPAREN boolean RPAREN statement conditional_aux
@@ -365,7 +358,7 @@ state 13
     (2) block -> . LBRACE declaration statements RBRACE
 
     BREAK           shift and go to state 19
-    RBRACE          reduce using rule 73 (empty -> .)
+    RBRACE          reduce using rule 70 (empty -> .)
     HASH            shift and go to state 23
     ID              shift and go to state 24
     IF              shift and go to state 25
@@ -526,29 +519,25 @@ state 24
     (37) offset -> . empty
     (38) field -> . DOT factor field
     (39) field -> . DOT factor
-    (73) empty -> .
+    (70) empty -> .
 
   ! shift/reduce conflict for DOT resolved as shift
     LBRACK          shift and go to state 44
     DOT             shift and go to state 45
-    EQUALS          reduce using rule 73 (empty -> .)
-    TIMES           reduce using rule 73 (empty -> .)
-    DIVIDE          reduce using rule 73 (empty -> .)
-    PLUS            reduce using rule 73 (empty -> .)
-    MINUS           reduce using rule 73 (empty -> .)
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
+    EQUALS          reduce using rule 70 (empty -> .)
+    TIMES           reduce using rule 70 (empty -> .)
+    DIVIDE          reduce using rule 70 (empty -> .)
+    PLUS            reduce using rule 70 (empty -> .)
+    MINUS           reduce using rule 70 (empty -> .)
+    EQ              reduce using rule 70 (empty -> .)
+    NEQ             reduce using rule 70 (empty -> .)
+    AND             reduce using rule 70 (empty -> .)
+    SEMICOLON       reduce using rule 70 (empty -> .)
+    OR              reduce using rule 70 (empty -> .)
+    RBRACK          reduce using rule 70 (empty -> .)
+    RPAREN          reduce using rule 70 (empty -> .)
 
-  ! DOT             [ reduce using rule 73 (empty -> .) ]
+  ! DOT             [ reduce using rule 70 (empty -> .) ]
 
     local_aux                      shift and go to state 40
     offset                         shift and go to state 41
@@ -660,13 +649,13 @@ state 34
     (6) type -> . basic HASH
     (7) type -> . basic
     (8) type -> . RECORD LBRACE declaration RBRACE
-    (73) empty -> .
+    (70) empty -> .
     (11) basic -> . INT
     (12) basic -> . CHAR
     (13) basic -> . BOOL
 
     RECORD          shift and go to state 8
-    RBRACE          reduce using rule 73 (empty -> .)
+    RBRACE          reduce using rule 70 (empty -> .)
     INT             shift and go to state 9
     CHAR            shift and go to state 10
     BOOL            shift and go to state 11
@@ -704,31 +693,46 @@ state 36
 state 37
 
     (16) statement -> local EQUALS . boolean SEMICOLON
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
@@ -738,9 +742,10 @@ state 37
     equality                       shift and go to state 57
     relational                     shift and go to state 58
     expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
 
 state 38
 
@@ -769,31 +774,27 @@ state 39
     (37) offset -> . empty
     (38) field -> . DOT factor field
     (39) field -> . DOT factor
-    (73) empty -> .
+    (70) empty -> .
 
   ! shift/reduce conflict for DOT resolved as shift
     LBRACK          shift and go to state 44
     DOT             shift and go to state 45
-    EQUALS          reduce using rule 73 (empty -> .)
-    TIMES           reduce using rule 73 (empty -> .)
-    DIVIDE          reduce using rule 73 (empty -> .)
-    PLUS            reduce using rule 73 (empty -> .)
-    MINUS           reduce using rule 73 (empty -> .)
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
+    EQUALS          reduce using rule 70 (empty -> .)
+    TIMES           reduce using rule 70 (empty -> .)
+    DIVIDE          reduce using rule 70 (empty -> .)
+    PLUS            reduce using rule 70 (empty -> .)
+    MINUS           reduce using rule 70 (empty -> .)
+    EQ              reduce using rule 70 (empty -> .)
+    NEQ             reduce using rule 70 (empty -> .)
+    AND             reduce using rule 70 (empty -> .)
+    SEMICOLON       reduce using rule 70 (empty -> .)
+    OR              reduce using rule 70 (empty -> .)
+    RBRACK          reduce using rule 70 (empty -> .)
+    RPAREN          reduce using rule 70 (empty -> .)
 
-  ! DOT             [ reduce using rule 73 (empty -> .) ]
+  ! DOT             [ reduce using rule 70 (empty -> .) ]
 
-    local_aux                      shift and go to state 70
+    local_aux                      shift and go to state 75
     offset                         shift and go to state 41
     field                          shift and go to state 42
     empty                          shift and go to state 43
@@ -807,18 +808,14 @@ state 40
     DIVIDE          reduce using rule 32 (local -> ID local_aux .)
     PLUS            reduce using rule 32 (local -> ID local_aux .)
     MINUS           reduce using rule 32 (local -> ID local_aux .)
-    LT              reduce using rule 32 (local -> ID local_aux .)
-    LE              reduce using rule 32 (local -> ID local_aux .)
-    GT              reduce using rule 32 (local -> ID local_aux .)
-    GE              reduce using rule 32 (local -> ID local_aux .)
-    DOT             reduce using rule 32 (local -> ID local_aux .)
-    RPAREN          reduce using rule 32 (local -> ID local_aux .)
     EQ              reduce using rule 32 (local -> ID local_aux .)
     NEQ             reduce using rule 32 (local -> ID local_aux .)
     AND             reduce using rule 32 (local -> ID local_aux .)
-    OR              reduce using rule 32 (local -> ID local_aux .)
     SEMICOLON       reduce using rule 32 (local -> ID local_aux .)
+    OR              reduce using rule 32 (local -> ID local_aux .)
     RBRACK          reduce using rule 32 (local -> ID local_aux .)
+    DOT             reduce using rule 32 (local -> ID local_aux .)
+    RPAREN          reduce using rule 32 (local -> ID local_aux .)
 
 
 state 41
@@ -830,18 +827,14 @@ state 41
     DIVIDE          reduce using rule 33 (local_aux -> offset .)
     PLUS            reduce using rule 33 (local_aux -> offset .)
     MINUS           reduce using rule 33 (local_aux -> offset .)
-    LT              reduce using rule 33 (local_aux -> offset .)
-    LE              reduce using rule 33 (local_aux -> offset .)
-    GT              reduce using rule 33 (local_aux -> offset .)
-    GE              reduce using rule 33 (local_aux -> offset .)
-    DOT             reduce using rule 33 (local_aux -> offset .)
-    RPAREN          reduce using rule 33 (local_aux -> offset .)
     EQ              reduce using rule 33 (local_aux -> offset .)
     NEQ             reduce using rule 33 (local_aux -> offset .)
     AND             reduce using rule 33 (local_aux -> offset .)
-    OR              reduce using rule 33 (local_aux -> offset .)
     SEMICOLON       reduce using rule 33 (local_aux -> offset .)
+    OR              reduce using rule 33 (local_aux -> offset .)
     RBRACK          reduce using rule 33 (local_aux -> offset .)
+    DOT             reduce using rule 33 (local_aux -> offset .)
+    RPAREN          reduce using rule 33 (local_aux -> offset .)
 
 
 state 42
@@ -853,18 +846,14 @@ state 42
     DIVIDE          reduce using rule 34 (local_aux -> field .)
     PLUS            reduce using rule 34 (local_aux -> field .)
     MINUS           reduce using rule 34 (local_aux -> field .)
-    LT              reduce using rule 34 (local_aux -> field .)
-    LE              reduce using rule 34 (local_aux -> field .)
-    GT              reduce using rule 34 (local_aux -> field .)
-    GE              reduce using rule 34 (local_aux -> field .)
-    DOT             reduce using rule 34 (local_aux -> field .)
-    RPAREN          reduce using rule 34 (local_aux -> field .)
     EQ              reduce using rule 34 (local_aux -> field .)
     NEQ             reduce using rule 34 (local_aux -> field .)
     AND             reduce using rule 34 (local_aux -> field .)
-    OR              reduce using rule 34 (local_aux -> field .)
     SEMICOLON       reduce using rule 34 (local_aux -> field .)
+    OR              reduce using rule 34 (local_aux -> field .)
     RBRACK          reduce using rule 34 (local_aux -> field .)
+    DOT             reduce using rule 34 (local_aux -> field .)
+    RPAREN          reduce using rule 34 (local_aux -> field .)
 
 
 state 43
@@ -877,237 +866,86 @@ state 43
   ! reduce/reduce conflict for DIVIDE resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for PLUS resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for MINUS resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for LT resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for LE resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for GT resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for GE resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for DOT resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for RPAREN resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for EQ resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for NEQ resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for AND resolved using rule 35 (local_aux -> empty .)
-  ! reduce/reduce conflict for OR resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for SEMICOLON resolved using rule 35 (local_aux -> empty .)
+  ! reduce/reduce conflict for OR resolved using rule 35 (local_aux -> empty .)
   ! reduce/reduce conflict for RBRACK resolved using rule 35 (local_aux -> empty .)
+  ! reduce/reduce conflict for DOT resolved using rule 35 (local_aux -> empty .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 35 (local_aux -> empty .)
     EQUALS          reduce using rule 35 (local_aux -> empty .)
     TIMES           reduce using rule 35 (local_aux -> empty .)
     DIVIDE          reduce using rule 35 (local_aux -> empty .)
     PLUS            reduce using rule 35 (local_aux -> empty .)
     MINUS           reduce using rule 35 (local_aux -> empty .)
-    LT              reduce using rule 35 (local_aux -> empty .)
-    LE              reduce using rule 35 (local_aux -> empty .)
-    GT              reduce using rule 35 (local_aux -> empty .)
-    GE              reduce using rule 35 (local_aux -> empty .)
-    DOT             reduce using rule 35 (local_aux -> empty .)
-    RPAREN          reduce using rule 35 (local_aux -> empty .)
     EQ              reduce using rule 35 (local_aux -> empty .)
     NEQ             reduce using rule 35 (local_aux -> empty .)
     AND             reduce using rule 35 (local_aux -> empty .)
-    OR              reduce using rule 35 (local_aux -> empty .)
     SEMICOLON       reduce using rule 35 (local_aux -> empty .)
+    OR              reduce using rule 35 (local_aux -> empty .)
     RBRACK          reduce using rule 35 (local_aux -> empty .)
+    DOT             reduce using rule 35 (local_aux -> empty .)
+    RPAREN          reduce using rule 35 (local_aux -> empty .)
 
   ! EQUALS          [ reduce using rule 37 (offset -> empty .) ]
   ! TIMES           [ reduce using rule 37 (offset -> empty .) ]
   ! DIVIDE          [ reduce using rule 37 (offset -> empty .) ]
   ! PLUS            [ reduce using rule 37 (offset -> empty .) ]
   ! MINUS           [ reduce using rule 37 (offset -> empty .) ]
-  ! LT              [ reduce using rule 37 (offset -> empty .) ]
-  ! LE              [ reduce using rule 37 (offset -> empty .) ]
-  ! GT              [ reduce using rule 37 (offset -> empty .) ]
-  ! GE              [ reduce using rule 37 (offset -> empty .) ]
-  ! DOT             [ reduce using rule 37 (offset -> empty .) ]
-  ! RPAREN          [ reduce using rule 37 (offset -> empty .) ]
   ! EQ              [ reduce using rule 37 (offset -> empty .) ]
   ! NEQ             [ reduce using rule 37 (offset -> empty .) ]
   ! AND             [ reduce using rule 37 (offset -> empty .) ]
-  ! OR              [ reduce using rule 37 (offset -> empty .) ]
   ! SEMICOLON       [ reduce using rule 37 (offset -> empty .) ]
+  ! OR              [ reduce using rule 37 (offset -> empty .) ]
   ! RBRACK          [ reduce using rule 37 (offset -> empty .) ]
+  ! DOT             [ reduce using rule 37 (offset -> empty .) ]
+  ! RPAREN          [ reduce using rule 37 (offset -> empty .) ]
 
 
 state 44
 
     (36) offset -> LBRACK . boolean RBRACK offset
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    boolean                        shift and go to state 71
-    join                           shift and go to state 56
-    equality                       shift and go to state 57
-    relational                     shift and go to state 58
-    expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
-
-state 45
-
-    (38) field -> DOT . factor field
-    (39) field -> DOT . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    factor                         shift and go to state 72
-    local                          shift and go to state 54
-
-state 46
-
-    (26) conditional -> IF LPAREN . boolean RPAREN statement conditional_aux
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    boolean                        shift and go to state 73
-    join                           shift and go to state 56
-    equality                       shift and go to state 57
-    relational                     shift and go to state 58
-    expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
-
-state 47
-
-    (29) while_loop -> WHILE LPAREN . boolean RPAREN statement
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    boolean                        shift and go to state 74
-    join                           shift and go to state 56
-    equality                       shift and go to state 57
-    relational                     shift and go to state 58
-    expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
-
-state 48
-
-    (30) do_while_loop -> DO statement . WHILE LPAREN boolean RPAREN SEMICOLON
-
-    WHILE           shift and go to state 75
-
-
-state 49
-
-    (24) print -> PRINT LPAREN . boolean RPAREN SEMICOLON
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
@@ -1116,9 +954,212 @@ state 49
     equality                       shift and go to state 57
     relational                     shift and go to state 58
     expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
+
+state 45
+
+    (38) field -> DOT . factor field
+    (39) field -> DOT . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
+
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
+
+    factor                         shift and go to state 77
+    local                          shift and go to state 54
+
+state 46
+
+    (26) conditional -> IF LPAREN . boolean RPAREN statement conditional_aux
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
+
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
+
+    boolean                        shift and go to state 78
+    join                           shift and go to state 56
+    equality                       shift and go to state 57
+    relational                     shift and go to state 58
+    expression                     shift and go to state 59
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
+
+state 47
+
+    (29) while_loop -> WHILE LPAREN . boolean RPAREN statement
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
+
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
+
+    boolean                        shift and go to state 79
+    join                           shift and go to state 56
+    equality                       shift and go to state 57
+    relational                     shift and go to state 58
+    expression                     shift and go to state 59
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
+
+state 48
+
+    (30) do_while_loop -> DO statement . WHILE LPAREN boolean RPAREN SEMICOLON
+
+    WHILE           shift and go to state 80
+
+
+state 49
+
+    (24) print -> PRINT LPAREN . boolean RPAREN SEMICOLON
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
+
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
+
+    boolean                        shift and go to state 81
+    join                           shift and go to state 56
+    equality                       shift and go to state 57
+    relational                     shift and go to state 58
+    expression                     shift and go to state 59
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
     local                          shift and go to state 54
 
 state 50
@@ -1130,7 +1171,7 @@ state 50
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
-    local                          shift and go to state 77
+    local                          shift and go to state 82
 
 state 51
 
@@ -1141,28 +1182,28 @@ state 51
     (6) type -> . basic HASH
     (7) type -> . basic
     (8) type -> . RECORD LBRACE declaration RBRACE
-    (73) empty -> .
+    (70) empty -> .
     (11) basic -> . INT
     (12) basic -> . CHAR
     (13) basic -> . BOOL
 
     RECORD          shift and go to state 8
-    BREAK           reduce using rule 73 (empty -> .)
-    HASH            reduce using rule 73 (empty -> .)
-    ID              reduce using rule 73 (empty -> .)
-    IF              reduce using rule 73 (empty -> .)
-    WHILE           reduce using rule 73 (empty -> .)
-    DO              reduce using rule 73 (empty -> .)
-    PRINT           reduce using rule 73 (empty -> .)
-    READ            reduce using rule 73 (empty -> .)
-    LBRACE          reduce using rule 73 (empty -> .)
-    RBRACE          reduce using rule 73 (empty -> .)
+    BREAK           reduce using rule 70 (empty -> .)
+    HASH            reduce using rule 70 (empty -> .)
+    ID              reduce using rule 70 (empty -> .)
+    IF              reduce using rule 70 (empty -> .)
+    WHILE           reduce using rule 70 (empty -> .)
+    DO              reduce using rule 70 (empty -> .)
+    PRINT           reduce using rule 70 (empty -> .)
+    READ            reduce using rule 70 (empty -> .)
+    LBRACE          reduce using rule 70 (empty -> .)
+    RBRACE          reduce using rule 70 (empty -> .)
     INT             shift and go to state 9
     CHAR            shift and go to state 10
     BOOL            shift and go to state 11
 
     type                           shift and go to state 5
-    declaration                    shift and go to state 78
+    declaration                    shift and go to state 83
     empty                          shift and go to state 6
     basic                          shift and go to state 7
 
@@ -1171,378 +1212,445 @@ state 52
     (9) dimensions -> LBRACK NUMBER_INT . RBRACK dimensions
     (10) dimensions -> LBRACK NUMBER_INT . RBRACK
 
-    RBRACK          shift and go to state 79
+    RBRACK          shift and go to state 84
 
 
 state 53
 
     (8) type -> RECORD LBRACE declaration . RBRACE
 
-    RBRACE          shift and go to state 80
+    RBRACE          shift and go to state 85
 
 
 state 54
 
-    (68) factor -> local .
+    (65) factor -> local .
 
-    TIMES           reduce using rule 68 (factor -> local .)
-    DIVIDE          reduce using rule 68 (factor -> local .)
-    PLUS            reduce using rule 68 (factor -> local .)
-    MINUS           reduce using rule 68 (factor -> local .)
-    LT              reduce using rule 68 (factor -> local .)
-    LE              reduce using rule 68 (factor -> local .)
-    GT              reduce using rule 68 (factor -> local .)
-    GE              reduce using rule 68 (factor -> local .)
-    EQUALS          reduce using rule 68 (factor -> local .)
-    DOT             reduce using rule 68 (factor -> local .)
-    RPAREN          reduce using rule 68 (factor -> local .)
-    EQ              reduce using rule 68 (factor -> local .)
-    NEQ             reduce using rule 68 (factor -> local .)
-    AND             reduce using rule 68 (factor -> local .)
-    OR              reduce using rule 68 (factor -> local .)
-    SEMICOLON       reduce using rule 68 (factor -> local .)
-    RBRACK          reduce using rule 68 (factor -> local .)
+    TIMES           reduce using rule 65 (factor -> local .)
+    DIVIDE          reduce using rule 65 (factor -> local .)
+    PLUS            reduce using rule 65 (factor -> local .)
+    MINUS           reduce using rule 65 (factor -> local .)
+    EQ              reduce using rule 65 (factor -> local .)
+    NEQ             reduce using rule 65 (factor -> local .)
+    AND             reduce using rule 65 (factor -> local .)
+    SEMICOLON       reduce using rule 65 (factor -> local .)
+    OR              reduce using rule 65 (factor -> local .)
+    RBRACK          reduce using rule 65 (factor -> local .)
+    EQUALS          reduce using rule 65 (factor -> local .)
+    DOT             reduce using rule 65 (factor -> local .)
+    RPAREN          reduce using rule 65 (factor -> local .)
 
 
 state 55
 
     (16) statement -> local EQUALS boolean . SEMICOLON
+    (41) boolean -> boolean . OR join
 
-    SEMICOLON       shift and go to state 81
+    SEMICOLON       shift and go to state 86
+    OR              shift and go to state 87
 
 
 state 56
 
-    (40) boolean -> join . boolean_aux
-    (41) boolean_aux -> . OR join boolean_aux
-    (42) boolean_aux -> . empty
-    (73) empty -> .
+    (40) boolean -> join .
+    (43) join -> join . AND equality
 
-    OR              shift and go to state 83
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
+    SEMICOLON       reduce using rule 40 (boolean -> join .)
+    OR              reduce using rule 40 (boolean -> join .)
+    RBRACK          reduce using rule 40 (boolean -> join .)
+    RPAREN          reduce using rule 40 (boolean -> join .)
+    AND             shift and go to state 88
 
-    boolean_aux                    shift and go to state 82
-    empty                          shift and go to state 84
 
 state 57
 
-    (43) join -> equality . join_aux
-    (44) join_aux -> . AND equality join_aux
-    (45) join_aux -> . empty
-    (73) empty -> .
+    (42) join -> equality .
+    (45) equality -> equality . EQ relational
+    (46) equality -> equality . NEQ relational
 
-    AND             shift and go to state 86
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
+    AND             reduce using rule 42 (join -> equality .)
+    SEMICOLON       reduce using rule 42 (join -> equality .)
+    OR              reduce using rule 42 (join -> equality .)
+    RBRACK          reduce using rule 42 (join -> equality .)
+    RPAREN          reduce using rule 42 (join -> equality .)
+    EQ              shift and go to state 89
+    NEQ             shift and go to state 90
 
-    join_aux                       shift and go to state 85
-    empty                          shift and go to state 87
 
 state 58
 
-    (46) equality -> relational . equality_aux
-    (47) equality_aux -> . EQ relational equality_aux
-    (48) equality_aux -> . NEQ relational equality_aux
-    (49) equality_aux -> . empty
-    (73) empty -> .
+    (44) equality -> relational .
 
-    EQ              shift and go to state 89
-    NEQ             shift and go to state 90
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
+    EQ              reduce using rule 44 (equality -> relational .)
+    NEQ             reduce using rule 44 (equality -> relational .)
+    AND             reduce using rule 44 (equality -> relational .)
+    SEMICOLON       reduce using rule 44 (equality -> relational .)
+    OR              reduce using rule 44 (equality -> relational .)
+    RBRACK          reduce using rule 44 (equality -> relational .)
+    RPAREN          reduce using rule 44 (equality -> relational .)
 
-    equality_aux                   shift and go to state 88
-    empty                          shift and go to state 91
 
 state 59
 
-    (50) relational -> expression . relational_operator expression
-    (51) relational_operator -> . LT
-    (52) relational_operator -> . LE
-    (53) relational_operator -> . GT
-    (54) relational_operator -> . GE
+    (47) relational -> expression .
 
-    LT              shift and go to state 93
-    LE              shift and go to state 94
-    GT              shift and go to state 95
-    GE              shift and go to state 96
+    EQ              reduce using rule 47 (relational -> expression .)
+    NEQ             reduce using rule 47 (relational -> expression .)
+    AND             reduce using rule 47 (relational -> expression .)
+    SEMICOLON       reduce using rule 47 (relational -> expression .)
+    OR              reduce using rule 47 (relational -> expression .)
+    RBRACK          reduce using rule 47 (relational -> expression .)
+    RPAREN          reduce using rule 47 (relational -> expression .)
 
-    relational_operator            shift and go to state 92
 
 state 60
 
-    (55) expression -> term . expression_aux
-    (56) expression_aux -> . expression_operator term expression_aux
-    (57) expression_aux -> . empty
-    (58) expression_operator -> . PLUS
-    (59) expression_operator -> . MINUS
-    (73) empty -> .
+    (48) relational -> relational_operator . expression
+    (53) expression -> . term expression_aux
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
 
-    PLUS            shift and go to state 100
-    MINUS           shift and go to state 101
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
 
-    expression_aux                 shift and go to state 97
-    expression_operator            shift and go to state 98
-    empty                          shift and go to state 99
+    expression                     shift and go to state 91
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
 
 state 61
 
-    (60) term -> unary . term_aux
-    (61) term_aux -> . TIMES unary term_aux
-    (62) term_aux -> . DIVIDE unary term_aux
-    (63) term_aux -> . empty
-    (73) empty -> .
+    (53) expression -> term . expression_aux
+    (59) term -> term . TIMES unary
+    (60) term -> term . DIVIDE unary
+    (54) expression_aux -> . expression_operator term expression_aux
+    (55) expression_aux -> . empty
+    (56) expression_operator -> . PLUS
+    (57) expression_operator -> . MINUS
+    (70) empty -> .
 
-    TIMES           shift and go to state 103
-    DIVIDE          shift and go to state 104
-    PLUS            reduce using rule 73 (empty -> .)
-    MINUS           reduce using rule 73 (empty -> .)
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
+    TIMES           shift and go to state 93
+    DIVIDE          shift and go to state 94
+    PLUS            shift and go to state 97
+    MINUS           shift and go to state 98
+    EQ              reduce using rule 70 (empty -> .)
+    NEQ             reduce using rule 70 (empty -> .)
+    AND             reduce using rule 70 (empty -> .)
+    SEMICOLON       reduce using rule 70 (empty -> .)
+    OR              reduce using rule 70 (empty -> .)
+    RBRACK          reduce using rule 70 (empty -> .)
+    RPAREN          reduce using rule 70 (empty -> .)
 
-    term_aux                       shift and go to state 102
-    empty                          shift and go to state 105
+    expression_aux                 shift and go to state 92
+    expression_operator            shift and go to state 95
+    empty                          shift and go to state 96
 
 state 62
 
-    (64) unary -> NOT . unary
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
+    (49) relational_operator -> LT .
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
+    NOT             reduce using rule 49 (relational_operator -> LT .)
+    NEG             reduce using rule 49 (relational_operator -> LT .)
+    LPAREN          reduce using rule 49 (relational_operator -> LT .)
+    NUMBER_INT      reduce using rule 49 (relational_operator -> LT .)
+    NUMBER_FLOAT    reduce using rule 49 (relational_operator -> LT .)
+    FALSE           reduce using rule 49 (relational_operator -> LT .)
+    TRUE            reduce using rule 49 (relational_operator -> LT .)
+    HASH            reduce using rule 49 (relational_operator -> LT .)
+    ID              reduce using rule 49 (relational_operator -> LT .)
 
-    unary                          shift and go to state 106
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
 
 state 63
 
-    (65) unary -> NEG . unary
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
+    (50) relational_operator -> LE .
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
+    NOT             reduce using rule 50 (relational_operator -> LE .)
+    NEG             reduce using rule 50 (relational_operator -> LE .)
+    LPAREN          reduce using rule 50 (relational_operator -> LE .)
+    NUMBER_INT      reduce using rule 50 (relational_operator -> LE .)
+    NUMBER_FLOAT    reduce using rule 50 (relational_operator -> LE .)
+    FALSE           reduce using rule 50 (relational_operator -> LE .)
+    TRUE            reduce using rule 50 (relational_operator -> LE .)
+    HASH            reduce using rule 50 (relational_operator -> LE .)
+    ID              reduce using rule 50 (relational_operator -> LE .)
 
-    unary                          shift and go to state 107
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
 
 state 64
 
-    (66) unary -> factor .
+    (51) relational_operator -> GT .
 
-    TIMES           reduce using rule 66 (unary -> factor .)
-    DIVIDE          reduce using rule 66 (unary -> factor .)
-    PLUS            reduce using rule 66 (unary -> factor .)
-    MINUS           reduce using rule 66 (unary -> factor .)
-    LT              reduce using rule 66 (unary -> factor .)
-    LE              reduce using rule 66 (unary -> factor .)
-    GT              reduce using rule 66 (unary -> factor .)
-    GE              reduce using rule 66 (unary -> factor .)
-    EQ              reduce using rule 66 (unary -> factor .)
-    NEQ             reduce using rule 66 (unary -> factor .)
-    AND             reduce using rule 66 (unary -> factor .)
-    OR              reduce using rule 66 (unary -> factor .)
-    SEMICOLON       reduce using rule 66 (unary -> factor .)
-    RBRACK          reduce using rule 66 (unary -> factor .)
-    RPAREN          reduce using rule 66 (unary -> factor .)
+    NOT             reduce using rule 51 (relational_operator -> GT .)
+    NEG             reduce using rule 51 (relational_operator -> GT .)
+    LPAREN          reduce using rule 51 (relational_operator -> GT .)
+    NUMBER_INT      reduce using rule 51 (relational_operator -> GT .)
+    NUMBER_FLOAT    reduce using rule 51 (relational_operator -> GT .)
+    FALSE           reduce using rule 51 (relational_operator -> GT .)
+    TRUE            reduce using rule 51 (relational_operator -> GT .)
+    HASH            reduce using rule 51 (relational_operator -> GT .)
+    ID              reduce using rule 51 (relational_operator -> GT .)
 
 
 state 65
 
-    (67) factor -> LPAREN . boolean RPAREN
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
+    (52) relational_operator -> GE .
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
+    NOT             reduce using rule 52 (relational_operator -> GE .)
+    NEG             reduce using rule 52 (relational_operator -> GE .)
+    LPAREN          reduce using rule 52 (relational_operator -> GE .)
+    NUMBER_INT      reduce using rule 52 (relational_operator -> GE .)
+    NUMBER_FLOAT    reduce using rule 52 (relational_operator -> GE .)
+    FALSE           reduce using rule 52 (relational_operator -> GE .)
+    TRUE            reduce using rule 52 (relational_operator -> GE .)
+    HASH            reduce using rule 52 (relational_operator -> GE .)
+    ID              reduce using rule 52 (relational_operator -> GE .)
 
-    boolean                        shift and go to state 108
-    join                           shift and go to state 56
-    equality                       shift and go to state 57
-    relational                     shift and go to state 58
-    expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
 
 state 66
 
-    (69) factor -> NUMBER_INT .
+    (58) term -> unary .
 
-    TIMES           reduce using rule 69 (factor -> NUMBER_INT .)
-    DIVIDE          reduce using rule 69 (factor -> NUMBER_INT .)
-    PLUS            reduce using rule 69 (factor -> NUMBER_INT .)
-    MINUS           reduce using rule 69 (factor -> NUMBER_INT .)
-    LT              reduce using rule 69 (factor -> NUMBER_INT .)
-    LE              reduce using rule 69 (factor -> NUMBER_INT .)
-    GT              reduce using rule 69 (factor -> NUMBER_INT .)
-    GE              reduce using rule 69 (factor -> NUMBER_INT .)
-    EQUALS          reduce using rule 69 (factor -> NUMBER_INT .)
-    DOT             reduce using rule 69 (factor -> NUMBER_INT .)
-    RPAREN          reduce using rule 69 (factor -> NUMBER_INT .)
-    EQ              reduce using rule 69 (factor -> NUMBER_INT .)
-    NEQ             reduce using rule 69 (factor -> NUMBER_INT .)
-    AND             reduce using rule 69 (factor -> NUMBER_INT .)
-    OR              reduce using rule 69 (factor -> NUMBER_INT .)
-    SEMICOLON       reduce using rule 69 (factor -> NUMBER_INT .)
-    RBRACK          reduce using rule 69 (factor -> NUMBER_INT .)
+    TIMES           reduce using rule 58 (term -> unary .)
+    DIVIDE          reduce using rule 58 (term -> unary .)
+    PLUS            reduce using rule 58 (term -> unary .)
+    MINUS           reduce using rule 58 (term -> unary .)
+    EQ              reduce using rule 58 (term -> unary .)
+    NEQ             reduce using rule 58 (term -> unary .)
+    AND             reduce using rule 58 (term -> unary .)
+    SEMICOLON       reduce using rule 58 (term -> unary .)
+    OR              reduce using rule 58 (term -> unary .)
+    RBRACK          reduce using rule 58 (term -> unary .)
+    RPAREN          reduce using rule 58 (term -> unary .)
 
 
 state 67
 
-    (70) factor -> NUMBER_FLOAT .
+    (61) unary -> NOT . unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
 
-    TIMES           reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    DIVIDE          reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    PLUS            reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    MINUS           reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    LT              reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    LE              reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    GT              reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    GE              reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    EQUALS          reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    DOT             reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    RPAREN          reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    EQ              reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    NEQ             reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    AND             reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    OR              reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    SEMICOLON       reduce using rule 70 (factor -> NUMBER_FLOAT .)
-    RBRACK          reduce using rule 70 (factor -> NUMBER_FLOAT .)
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
 
+    unary                          shift and go to state 99
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
 
 state 68
 
-    (71) factor -> FALSE .
+    (62) unary -> NEG . unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
 
-    TIMES           reduce using rule 71 (factor -> FALSE .)
-    DIVIDE          reduce using rule 71 (factor -> FALSE .)
-    PLUS            reduce using rule 71 (factor -> FALSE .)
-    MINUS           reduce using rule 71 (factor -> FALSE .)
-    LT              reduce using rule 71 (factor -> FALSE .)
-    LE              reduce using rule 71 (factor -> FALSE .)
-    GT              reduce using rule 71 (factor -> FALSE .)
-    GE              reduce using rule 71 (factor -> FALSE .)
-    EQUALS          reduce using rule 71 (factor -> FALSE .)
-    DOT             reduce using rule 71 (factor -> FALSE .)
-    RPAREN          reduce using rule 71 (factor -> FALSE .)
-    EQ              reduce using rule 71 (factor -> FALSE .)
-    NEQ             reduce using rule 71 (factor -> FALSE .)
-    AND             reduce using rule 71 (factor -> FALSE .)
-    OR              reduce using rule 71 (factor -> FALSE .)
-    SEMICOLON       reduce using rule 71 (factor -> FALSE .)
-    RBRACK          reduce using rule 71 (factor -> FALSE .)
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
 
+    unary                          shift and go to state 100
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
 
 state 69
 
-    (72) factor -> TRUE .
+    (63) unary -> factor .
 
-    TIMES           reduce using rule 72 (factor -> TRUE .)
-    DIVIDE          reduce using rule 72 (factor -> TRUE .)
-    PLUS            reduce using rule 72 (factor -> TRUE .)
-    MINUS           reduce using rule 72 (factor -> TRUE .)
-    LT              reduce using rule 72 (factor -> TRUE .)
-    LE              reduce using rule 72 (factor -> TRUE .)
-    GT              reduce using rule 72 (factor -> TRUE .)
-    GE              reduce using rule 72 (factor -> TRUE .)
-    EQUALS          reduce using rule 72 (factor -> TRUE .)
-    DOT             reduce using rule 72 (factor -> TRUE .)
-    RPAREN          reduce using rule 72 (factor -> TRUE .)
-    EQ              reduce using rule 72 (factor -> TRUE .)
-    NEQ             reduce using rule 72 (factor -> TRUE .)
-    AND             reduce using rule 72 (factor -> TRUE .)
-    OR              reduce using rule 72 (factor -> TRUE .)
-    SEMICOLON       reduce using rule 72 (factor -> TRUE .)
-    RBRACK          reduce using rule 72 (factor -> TRUE .)
+    TIMES           reduce using rule 63 (unary -> factor .)
+    DIVIDE          reduce using rule 63 (unary -> factor .)
+    PLUS            reduce using rule 63 (unary -> factor .)
+    MINUS           reduce using rule 63 (unary -> factor .)
+    EQ              reduce using rule 63 (unary -> factor .)
+    NEQ             reduce using rule 63 (unary -> factor .)
+    AND             reduce using rule 63 (unary -> factor .)
+    SEMICOLON       reduce using rule 63 (unary -> factor .)
+    OR              reduce using rule 63 (unary -> factor .)
+    RBRACK          reduce using rule 63 (unary -> factor .)
+    RPAREN          reduce using rule 63 (unary -> factor .)
 
 
 state 70
+
+    (64) factor -> LPAREN . boolean RPAREN
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
+
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
+
+    boolean                        shift and go to state 101
+    join                           shift and go to state 56
+    equality                       shift and go to state 57
+    relational                     shift and go to state 58
+    expression                     shift and go to state 59
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
+
+state 71
+
+    (66) factor -> NUMBER_INT .
+
+    TIMES           reduce using rule 66 (factor -> NUMBER_INT .)
+    DIVIDE          reduce using rule 66 (factor -> NUMBER_INT .)
+    PLUS            reduce using rule 66 (factor -> NUMBER_INT .)
+    MINUS           reduce using rule 66 (factor -> NUMBER_INT .)
+    EQ              reduce using rule 66 (factor -> NUMBER_INT .)
+    NEQ             reduce using rule 66 (factor -> NUMBER_INT .)
+    AND             reduce using rule 66 (factor -> NUMBER_INT .)
+    SEMICOLON       reduce using rule 66 (factor -> NUMBER_INT .)
+    OR              reduce using rule 66 (factor -> NUMBER_INT .)
+    RBRACK          reduce using rule 66 (factor -> NUMBER_INT .)
+    EQUALS          reduce using rule 66 (factor -> NUMBER_INT .)
+    DOT             reduce using rule 66 (factor -> NUMBER_INT .)
+    RPAREN          reduce using rule 66 (factor -> NUMBER_INT .)
+
+
+state 72
+
+    (67) factor -> NUMBER_FLOAT .
+
+    TIMES           reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    DIVIDE          reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    PLUS            reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    MINUS           reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    EQ              reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    NEQ             reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    AND             reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    SEMICOLON       reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    OR              reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    RBRACK          reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    EQUALS          reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    DOT             reduce using rule 67 (factor -> NUMBER_FLOAT .)
+    RPAREN          reduce using rule 67 (factor -> NUMBER_FLOAT .)
+
+
+state 73
+
+    (68) factor -> FALSE .
+
+    TIMES           reduce using rule 68 (factor -> FALSE .)
+    DIVIDE          reduce using rule 68 (factor -> FALSE .)
+    PLUS            reduce using rule 68 (factor -> FALSE .)
+    MINUS           reduce using rule 68 (factor -> FALSE .)
+    EQ              reduce using rule 68 (factor -> FALSE .)
+    NEQ             reduce using rule 68 (factor -> FALSE .)
+    AND             reduce using rule 68 (factor -> FALSE .)
+    SEMICOLON       reduce using rule 68 (factor -> FALSE .)
+    OR              reduce using rule 68 (factor -> FALSE .)
+    RBRACK          reduce using rule 68 (factor -> FALSE .)
+    EQUALS          reduce using rule 68 (factor -> FALSE .)
+    DOT             reduce using rule 68 (factor -> FALSE .)
+    RPAREN          reduce using rule 68 (factor -> FALSE .)
+
+
+state 74
+
+    (69) factor -> TRUE .
+
+    TIMES           reduce using rule 69 (factor -> TRUE .)
+    DIVIDE          reduce using rule 69 (factor -> TRUE .)
+    PLUS            reduce using rule 69 (factor -> TRUE .)
+    MINUS           reduce using rule 69 (factor -> TRUE .)
+    EQ              reduce using rule 69 (factor -> TRUE .)
+    NEQ             reduce using rule 69 (factor -> TRUE .)
+    AND             reduce using rule 69 (factor -> TRUE .)
+    SEMICOLON       reduce using rule 69 (factor -> TRUE .)
+    OR              reduce using rule 69 (factor -> TRUE .)
+    RBRACK          reduce using rule 69 (factor -> TRUE .)
+    EQUALS          reduce using rule 69 (factor -> TRUE .)
+    DOT             reduce using rule 69 (factor -> TRUE .)
+    RPAREN          reduce using rule 69 (factor -> TRUE .)
+
+
+state 75
 
     (31) local -> HASH ID local_aux .
 
@@ -1551,28 +1659,26 @@ state 70
     DIVIDE          reduce using rule 31 (local -> HASH ID local_aux .)
     PLUS            reduce using rule 31 (local -> HASH ID local_aux .)
     MINUS           reduce using rule 31 (local -> HASH ID local_aux .)
-    LT              reduce using rule 31 (local -> HASH ID local_aux .)
-    LE              reduce using rule 31 (local -> HASH ID local_aux .)
-    GT              reduce using rule 31 (local -> HASH ID local_aux .)
-    GE              reduce using rule 31 (local -> HASH ID local_aux .)
-    DOT             reduce using rule 31 (local -> HASH ID local_aux .)
-    RPAREN          reduce using rule 31 (local -> HASH ID local_aux .)
     EQ              reduce using rule 31 (local -> HASH ID local_aux .)
     NEQ             reduce using rule 31 (local -> HASH ID local_aux .)
     AND             reduce using rule 31 (local -> HASH ID local_aux .)
-    OR              reduce using rule 31 (local -> HASH ID local_aux .)
     SEMICOLON       reduce using rule 31 (local -> HASH ID local_aux .)
+    OR              reduce using rule 31 (local -> HASH ID local_aux .)
     RBRACK          reduce using rule 31 (local -> HASH ID local_aux .)
+    DOT             reduce using rule 31 (local -> HASH ID local_aux .)
+    RPAREN          reduce using rule 31 (local -> HASH ID local_aux .)
 
 
-state 71
+state 76
 
     (36) offset -> LBRACK boolean . RBRACK offset
+    (41) boolean -> boolean . OR join
 
-    RBRACK          shift and go to state 109
+    RBRACK          shift and go to state 102
+    OR              shift and go to state 87
 
 
-state 72
+state 77
 
     (38) field -> DOT factor . field
     (39) field -> DOT factor .
@@ -1585,59 +1691,61 @@ state 72
     DIVIDE          reduce using rule 39 (field -> DOT factor .)
     PLUS            reduce using rule 39 (field -> DOT factor .)
     MINUS           reduce using rule 39 (field -> DOT factor .)
-    LT              reduce using rule 39 (field -> DOT factor .)
-    LE              reduce using rule 39 (field -> DOT factor .)
-    GT              reduce using rule 39 (field -> DOT factor .)
-    GE              reduce using rule 39 (field -> DOT factor .)
-    RPAREN          reduce using rule 39 (field -> DOT factor .)
     EQ              reduce using rule 39 (field -> DOT factor .)
     NEQ             reduce using rule 39 (field -> DOT factor .)
     AND             reduce using rule 39 (field -> DOT factor .)
-    OR              reduce using rule 39 (field -> DOT factor .)
     SEMICOLON       reduce using rule 39 (field -> DOT factor .)
+    OR              reduce using rule 39 (field -> DOT factor .)
     RBRACK          reduce using rule 39 (field -> DOT factor .)
+    RPAREN          reduce using rule 39 (field -> DOT factor .)
     DOT             shift and go to state 45
 
   ! DOT             [ reduce using rule 39 (field -> DOT factor .) ]
 
-    field                          shift and go to state 110
+    field                          shift and go to state 103
 
-state 73
+state 78
 
     (26) conditional -> IF LPAREN boolean . RPAREN statement conditional_aux
+    (41) boolean -> boolean . OR join
 
-    RPAREN          shift and go to state 111
+    RPAREN          shift and go to state 104
+    OR              shift and go to state 87
 
 
-state 74
+state 79
 
     (29) while_loop -> WHILE LPAREN boolean . RPAREN statement
+    (41) boolean -> boolean . OR join
 
-    RPAREN          shift and go to state 112
+    RPAREN          shift and go to state 105
+    OR              shift and go to state 87
 
 
-state 75
+state 80
 
     (30) do_while_loop -> DO statement WHILE . LPAREN boolean RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 113
+    LPAREN          shift and go to state 106
 
 
-state 76
+state 81
 
     (24) print -> PRINT LPAREN boolean . RPAREN SEMICOLON
+    (41) boolean -> boolean . OR join
 
-    RPAREN          shift and go to state 114
+    RPAREN          shift and go to state 107
+    OR              shift and go to state 87
 
 
-state 77
+state 82
 
     (25) read -> READ LPAREN local . RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 115
+    RPAREN          shift and go to state 108
 
 
-state 78
+state 83
 
     (3) declaration -> type ID SEMICOLON declaration .
 
@@ -1653,7 +1761,7 @@ state 78
     RBRACE          reduce using rule 3 (declaration -> type ID SEMICOLON declaration .)
 
 
-state 79
+state 84
 
     (9) dimensions -> LBRACK NUMBER_INT RBRACK . dimensions
     (10) dimensions -> LBRACK NUMBER_INT RBRACK .
@@ -1663,16 +1771,16 @@ state 79
     ID              reduce using rule 10 (dimensions -> LBRACK NUMBER_INT RBRACK .)
     LBRACK          shift and go to state 33
 
-    dimensions                     shift and go to state 116
+    dimensions                     shift and go to state 109
 
-state 80
+state 85
 
     (8) type -> RECORD LBRACE declaration RBRACE .
 
     ID              reduce using rule 8 (type -> RECORD LBRACE declaration RBRACE .)
 
 
-state 81
+state 86
 
     (16) statement -> local EQUALS boolean SEMICOLON .
 
@@ -1689,575 +1797,434 @@ state 81
     ELSE            reduce using rule 16 (statement -> local EQUALS boolean SEMICOLON .)
 
 
-state 82
+state 87
 
-    (40) boolean -> join boolean_aux .
-
-    SEMICOLON       reduce using rule 40 (boolean -> join boolean_aux .)
-    RBRACK          reduce using rule 40 (boolean -> join boolean_aux .)
-    RPAREN          reduce using rule 40 (boolean -> join boolean_aux .)
-
-
-state 83
-
-    (41) boolean_aux -> OR . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
+    (41) boolean -> boolean OR . join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
-    join                           shift and go to state 117
+    join                           shift and go to state 110
     equality                       shift and go to state 57
     relational                     shift and go to state 58
     expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
     local                          shift and go to state 54
-
-state 84
-
-    (42) boolean_aux -> empty .
-
-    SEMICOLON       reduce using rule 42 (boolean_aux -> empty .)
-    RBRACK          reduce using rule 42 (boolean_aux -> empty .)
-    RPAREN          reduce using rule 42 (boolean_aux -> empty .)
-
-
-state 85
-
-    (43) join -> equality join_aux .
-
-    OR              reduce using rule 43 (join -> equality join_aux .)
-    SEMICOLON       reduce using rule 43 (join -> equality join_aux .)
-    RBRACK          reduce using rule 43 (join -> equality join_aux .)
-    RPAREN          reduce using rule 43 (join -> equality join_aux .)
-
-
-state 86
-
-    (44) join_aux -> AND . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    equality                       shift and go to state 118
-    relational                     shift and go to state 58
-    expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
-
-state 87
-
-    (45) join_aux -> empty .
-
-    OR              reduce using rule 45 (join_aux -> empty .)
-    SEMICOLON       reduce using rule 45 (join_aux -> empty .)
-    RBRACK          reduce using rule 45 (join_aux -> empty .)
-    RPAREN          reduce using rule 45 (join_aux -> empty .)
-
 
 state 88
 
-    (46) equality -> relational equality_aux .
-
-    AND             reduce using rule 46 (equality -> relational equality_aux .)
-    OR              reduce using rule 46 (equality -> relational equality_aux .)
-    SEMICOLON       reduce using rule 46 (equality -> relational equality_aux .)
-    RBRACK          reduce using rule 46 (equality -> relational equality_aux .)
-    RPAREN          reduce using rule 46 (equality -> relational equality_aux .)
-
-
-state 89
-
-    (47) equality_aux -> EQ . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
+    (43) join -> join AND . equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
-    relational                     shift and go to state 119
+    equality                       shift and go to state 111
+    relational                     shift and go to state 58
     expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
+
+state 89
+
+    (45) equality -> equality EQ . relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
+
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
+
+    relational                     shift and go to state 112
+    expression                     shift and go to state 59
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
     local                          shift and go to state 54
 
 state 90
 
-    (48) equality_aux -> NEQ . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
+    (46) equality -> equality NEQ . relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
-    relational                     shift and go to state 120
+    relational                     shift and go to state 113
     expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
     local                          shift and go to state 54
 
 state 91
 
-    (49) equality_aux -> empty .
+    (48) relational -> relational_operator expression .
 
-    AND             reduce using rule 49 (equality_aux -> empty .)
-    OR              reduce using rule 49 (equality_aux -> empty .)
-    SEMICOLON       reduce using rule 49 (equality_aux -> empty .)
-    RBRACK          reduce using rule 49 (equality_aux -> empty .)
-    RPAREN          reduce using rule 49 (equality_aux -> empty .)
+    EQ              reduce using rule 48 (relational -> relational_operator expression .)
+    NEQ             reduce using rule 48 (relational -> relational_operator expression .)
+    AND             reduce using rule 48 (relational -> relational_operator expression .)
+    SEMICOLON       reduce using rule 48 (relational -> relational_operator expression .)
+    OR              reduce using rule 48 (relational -> relational_operator expression .)
+    RBRACK          reduce using rule 48 (relational -> relational_operator expression .)
+    RPAREN          reduce using rule 48 (relational -> relational_operator expression .)
 
 
 state 92
 
-    (50) relational -> expression relational_operator . expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
+    (53) expression -> term expression_aux .
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
+    EQ              reduce using rule 53 (expression -> term expression_aux .)
+    NEQ             reduce using rule 53 (expression -> term expression_aux .)
+    AND             reduce using rule 53 (expression -> term expression_aux .)
+    SEMICOLON       reduce using rule 53 (expression -> term expression_aux .)
+    OR              reduce using rule 53 (expression -> term expression_aux .)
+    RBRACK          reduce using rule 53 (expression -> term expression_aux .)
+    RPAREN          reduce using rule 53 (expression -> term expression_aux .)
 
-    expression                     shift and go to state 121
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
 
 state 93
 
-    (51) relational_operator -> LT .
+    (59) term -> term TIMES . unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
 
-    NOT             reduce using rule 51 (relational_operator -> LT .)
-    NEG             reduce using rule 51 (relational_operator -> LT .)
-    LPAREN          reduce using rule 51 (relational_operator -> LT .)
-    NUMBER_INT      reduce using rule 51 (relational_operator -> LT .)
-    NUMBER_FLOAT    reduce using rule 51 (relational_operator -> LT .)
-    FALSE           reduce using rule 51 (relational_operator -> LT .)
-    TRUE            reduce using rule 51 (relational_operator -> LT .)
-    HASH            reduce using rule 51 (relational_operator -> LT .)
-    ID              reduce using rule 51 (relational_operator -> LT .)
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
 
+    unary                          shift and go to state 114
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
 
 state 94
 
-    (52) relational_operator -> LE .
+    (60) term -> term DIVIDE . unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
 
-    NOT             reduce using rule 52 (relational_operator -> LE .)
-    NEG             reduce using rule 52 (relational_operator -> LE .)
-    LPAREN          reduce using rule 52 (relational_operator -> LE .)
-    NUMBER_INT      reduce using rule 52 (relational_operator -> LE .)
-    NUMBER_FLOAT    reduce using rule 52 (relational_operator -> LE .)
-    FALSE           reduce using rule 52 (relational_operator -> LE .)
-    TRUE            reduce using rule 52 (relational_operator -> LE .)
-    HASH            reduce using rule 52 (relational_operator -> LE .)
-    ID              reduce using rule 52 (relational_operator -> LE .)
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
 
+    unary                          shift and go to state 115
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
 
 state 95
 
-    (53) relational_operator -> GT .
+    (54) expression_aux -> expression_operator . term expression_aux
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
+    (31) local -> . HASH ID local_aux
+    (32) local -> . ID local_aux
 
-    NOT             reduce using rule 53 (relational_operator -> GT .)
-    NEG             reduce using rule 53 (relational_operator -> GT .)
-    LPAREN          reduce using rule 53 (relational_operator -> GT .)
-    NUMBER_INT      reduce using rule 53 (relational_operator -> GT .)
-    NUMBER_FLOAT    reduce using rule 53 (relational_operator -> GT .)
-    FALSE           reduce using rule 53 (relational_operator -> GT .)
-    TRUE            reduce using rule 53 (relational_operator -> GT .)
-    HASH            reduce using rule 53 (relational_operator -> GT .)
-    ID              reduce using rule 53 (relational_operator -> GT .)
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
+    HASH            shift and go to state 23
+    ID              shift and go to state 24
 
+    term                           shift and go to state 116
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
+    local                          shift and go to state 54
 
 state 96
 
-    (54) relational_operator -> GE .
+    (55) expression_aux -> empty .
 
-    NOT             reduce using rule 54 (relational_operator -> GE .)
-    NEG             reduce using rule 54 (relational_operator -> GE .)
-    LPAREN          reduce using rule 54 (relational_operator -> GE .)
-    NUMBER_INT      reduce using rule 54 (relational_operator -> GE .)
-    NUMBER_FLOAT    reduce using rule 54 (relational_operator -> GE .)
-    FALSE           reduce using rule 54 (relational_operator -> GE .)
-    TRUE            reduce using rule 54 (relational_operator -> GE .)
-    HASH            reduce using rule 54 (relational_operator -> GE .)
-    ID              reduce using rule 54 (relational_operator -> GE .)
+    EQ              reduce using rule 55 (expression_aux -> empty .)
+    NEQ             reduce using rule 55 (expression_aux -> empty .)
+    AND             reduce using rule 55 (expression_aux -> empty .)
+    SEMICOLON       reduce using rule 55 (expression_aux -> empty .)
+    OR              reduce using rule 55 (expression_aux -> empty .)
+    RBRACK          reduce using rule 55 (expression_aux -> empty .)
+    RPAREN          reduce using rule 55 (expression_aux -> empty .)
 
 
 state 97
 
-    (55) expression -> term expression_aux .
+    (56) expression_operator -> PLUS .
 
-    LT              reduce using rule 55 (expression -> term expression_aux .)
-    LE              reduce using rule 55 (expression -> term expression_aux .)
-    GT              reduce using rule 55 (expression -> term expression_aux .)
-    GE              reduce using rule 55 (expression -> term expression_aux .)
-    EQ              reduce using rule 55 (expression -> term expression_aux .)
-    NEQ             reduce using rule 55 (expression -> term expression_aux .)
-    AND             reduce using rule 55 (expression -> term expression_aux .)
-    OR              reduce using rule 55 (expression -> term expression_aux .)
-    SEMICOLON       reduce using rule 55 (expression -> term expression_aux .)
-    RBRACK          reduce using rule 55 (expression -> term expression_aux .)
-    RPAREN          reduce using rule 55 (expression -> term expression_aux .)
+    NOT             reduce using rule 56 (expression_operator -> PLUS .)
+    NEG             reduce using rule 56 (expression_operator -> PLUS .)
+    LPAREN          reduce using rule 56 (expression_operator -> PLUS .)
+    NUMBER_INT      reduce using rule 56 (expression_operator -> PLUS .)
+    NUMBER_FLOAT    reduce using rule 56 (expression_operator -> PLUS .)
+    FALSE           reduce using rule 56 (expression_operator -> PLUS .)
+    TRUE            reduce using rule 56 (expression_operator -> PLUS .)
+    HASH            reduce using rule 56 (expression_operator -> PLUS .)
+    ID              reduce using rule 56 (expression_operator -> PLUS .)
 
 
 state 98
 
-    (56) expression_aux -> expression_operator . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
+    (57) expression_operator -> MINUS .
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
+    NOT             reduce using rule 57 (expression_operator -> MINUS .)
+    NEG             reduce using rule 57 (expression_operator -> MINUS .)
+    LPAREN          reduce using rule 57 (expression_operator -> MINUS .)
+    NUMBER_INT      reduce using rule 57 (expression_operator -> MINUS .)
+    NUMBER_FLOAT    reduce using rule 57 (expression_operator -> MINUS .)
+    FALSE           reduce using rule 57 (expression_operator -> MINUS .)
+    TRUE            reduce using rule 57 (expression_operator -> MINUS .)
+    HASH            reduce using rule 57 (expression_operator -> MINUS .)
+    ID              reduce using rule 57 (expression_operator -> MINUS .)
 
-    term                           shift and go to state 122
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
 
 state 99
 
-    (57) expression_aux -> empty .
+    (61) unary -> NOT unary .
 
-    LT              reduce using rule 57 (expression_aux -> empty .)
-    LE              reduce using rule 57 (expression_aux -> empty .)
-    GT              reduce using rule 57 (expression_aux -> empty .)
-    GE              reduce using rule 57 (expression_aux -> empty .)
-    EQ              reduce using rule 57 (expression_aux -> empty .)
-    NEQ             reduce using rule 57 (expression_aux -> empty .)
-    AND             reduce using rule 57 (expression_aux -> empty .)
-    OR              reduce using rule 57 (expression_aux -> empty .)
-    SEMICOLON       reduce using rule 57 (expression_aux -> empty .)
-    RBRACK          reduce using rule 57 (expression_aux -> empty .)
-    RPAREN          reduce using rule 57 (expression_aux -> empty .)
+    TIMES           reduce using rule 61 (unary -> NOT unary .)
+    DIVIDE          reduce using rule 61 (unary -> NOT unary .)
+    PLUS            reduce using rule 61 (unary -> NOT unary .)
+    MINUS           reduce using rule 61 (unary -> NOT unary .)
+    EQ              reduce using rule 61 (unary -> NOT unary .)
+    NEQ             reduce using rule 61 (unary -> NOT unary .)
+    AND             reduce using rule 61 (unary -> NOT unary .)
+    SEMICOLON       reduce using rule 61 (unary -> NOT unary .)
+    OR              reduce using rule 61 (unary -> NOT unary .)
+    RBRACK          reduce using rule 61 (unary -> NOT unary .)
+    RPAREN          reduce using rule 61 (unary -> NOT unary .)
 
 
 state 100
 
-    (58) expression_operator -> PLUS .
+    (62) unary -> NEG unary .
 
-    NOT             reduce using rule 58 (expression_operator -> PLUS .)
-    NEG             reduce using rule 58 (expression_operator -> PLUS .)
-    LPAREN          reduce using rule 58 (expression_operator -> PLUS .)
-    NUMBER_INT      reduce using rule 58 (expression_operator -> PLUS .)
-    NUMBER_FLOAT    reduce using rule 58 (expression_operator -> PLUS .)
-    FALSE           reduce using rule 58 (expression_operator -> PLUS .)
-    TRUE            reduce using rule 58 (expression_operator -> PLUS .)
-    HASH            reduce using rule 58 (expression_operator -> PLUS .)
-    ID              reduce using rule 58 (expression_operator -> PLUS .)
+    TIMES           reduce using rule 62 (unary -> NEG unary .)
+    DIVIDE          reduce using rule 62 (unary -> NEG unary .)
+    PLUS            reduce using rule 62 (unary -> NEG unary .)
+    MINUS           reduce using rule 62 (unary -> NEG unary .)
+    EQ              reduce using rule 62 (unary -> NEG unary .)
+    NEQ             reduce using rule 62 (unary -> NEG unary .)
+    AND             reduce using rule 62 (unary -> NEG unary .)
+    SEMICOLON       reduce using rule 62 (unary -> NEG unary .)
+    OR              reduce using rule 62 (unary -> NEG unary .)
+    RBRACK          reduce using rule 62 (unary -> NEG unary .)
+    RPAREN          reduce using rule 62 (unary -> NEG unary .)
 
 
 state 101
 
-    (59) expression_operator -> MINUS .
+    (64) factor -> LPAREN boolean . RPAREN
+    (41) boolean -> boolean . OR join
 
-    NOT             reduce using rule 59 (expression_operator -> MINUS .)
-    NEG             reduce using rule 59 (expression_operator -> MINUS .)
-    LPAREN          reduce using rule 59 (expression_operator -> MINUS .)
-    NUMBER_INT      reduce using rule 59 (expression_operator -> MINUS .)
-    NUMBER_FLOAT    reduce using rule 59 (expression_operator -> MINUS .)
-    FALSE           reduce using rule 59 (expression_operator -> MINUS .)
-    TRUE            reduce using rule 59 (expression_operator -> MINUS .)
-    HASH            reduce using rule 59 (expression_operator -> MINUS .)
-    ID              reduce using rule 59 (expression_operator -> MINUS .)
+    RPAREN          shift and go to state 117
+    OR              shift and go to state 87
 
 
 state 102
 
-    (60) term -> unary term_aux .
-
-    PLUS            reduce using rule 60 (term -> unary term_aux .)
-    MINUS           reduce using rule 60 (term -> unary term_aux .)
-    LT              reduce using rule 60 (term -> unary term_aux .)
-    LE              reduce using rule 60 (term -> unary term_aux .)
-    GT              reduce using rule 60 (term -> unary term_aux .)
-    GE              reduce using rule 60 (term -> unary term_aux .)
-    EQ              reduce using rule 60 (term -> unary term_aux .)
-    NEQ             reduce using rule 60 (term -> unary term_aux .)
-    AND             reduce using rule 60 (term -> unary term_aux .)
-    OR              reduce using rule 60 (term -> unary term_aux .)
-    SEMICOLON       reduce using rule 60 (term -> unary term_aux .)
-    RBRACK          reduce using rule 60 (term -> unary term_aux .)
-    RPAREN          reduce using rule 60 (term -> unary term_aux .)
-
-
-state 103
-
-    (61) term_aux -> TIMES . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    unary                          shift and go to state 123
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
-
-state 104
-
-    (62) term_aux -> DIVIDE . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
-    (31) local -> . HASH ID local_aux
-    (32) local -> . ID local_aux
-
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
-    HASH            shift and go to state 23
-    ID              shift and go to state 24
-
-    unary                          shift and go to state 124
-    factor                         shift and go to state 64
-    local                          shift and go to state 54
-
-state 105
-
-    (63) term_aux -> empty .
-
-    PLUS            reduce using rule 63 (term_aux -> empty .)
-    MINUS           reduce using rule 63 (term_aux -> empty .)
-    LT              reduce using rule 63 (term_aux -> empty .)
-    LE              reduce using rule 63 (term_aux -> empty .)
-    GT              reduce using rule 63 (term_aux -> empty .)
-    GE              reduce using rule 63 (term_aux -> empty .)
-    EQ              reduce using rule 63 (term_aux -> empty .)
-    NEQ             reduce using rule 63 (term_aux -> empty .)
-    AND             reduce using rule 63 (term_aux -> empty .)
-    OR              reduce using rule 63 (term_aux -> empty .)
-    SEMICOLON       reduce using rule 63 (term_aux -> empty .)
-    RBRACK          reduce using rule 63 (term_aux -> empty .)
-    RPAREN          reduce using rule 63 (term_aux -> empty .)
-
-
-state 106
-
-    (64) unary -> NOT unary .
-
-    TIMES           reduce using rule 64 (unary -> NOT unary .)
-    DIVIDE          reduce using rule 64 (unary -> NOT unary .)
-    PLUS            reduce using rule 64 (unary -> NOT unary .)
-    MINUS           reduce using rule 64 (unary -> NOT unary .)
-    LT              reduce using rule 64 (unary -> NOT unary .)
-    LE              reduce using rule 64 (unary -> NOT unary .)
-    GT              reduce using rule 64 (unary -> NOT unary .)
-    GE              reduce using rule 64 (unary -> NOT unary .)
-    EQ              reduce using rule 64 (unary -> NOT unary .)
-    NEQ             reduce using rule 64 (unary -> NOT unary .)
-    AND             reduce using rule 64 (unary -> NOT unary .)
-    OR              reduce using rule 64 (unary -> NOT unary .)
-    SEMICOLON       reduce using rule 64 (unary -> NOT unary .)
-    RBRACK          reduce using rule 64 (unary -> NOT unary .)
-    RPAREN          reduce using rule 64 (unary -> NOT unary .)
-
-
-state 107
-
-    (65) unary -> NEG unary .
-
-    TIMES           reduce using rule 65 (unary -> NEG unary .)
-    DIVIDE          reduce using rule 65 (unary -> NEG unary .)
-    PLUS            reduce using rule 65 (unary -> NEG unary .)
-    MINUS           reduce using rule 65 (unary -> NEG unary .)
-    LT              reduce using rule 65 (unary -> NEG unary .)
-    LE              reduce using rule 65 (unary -> NEG unary .)
-    GT              reduce using rule 65 (unary -> NEG unary .)
-    GE              reduce using rule 65 (unary -> NEG unary .)
-    EQ              reduce using rule 65 (unary -> NEG unary .)
-    NEQ             reduce using rule 65 (unary -> NEG unary .)
-    AND             reduce using rule 65 (unary -> NEG unary .)
-    OR              reduce using rule 65 (unary -> NEG unary .)
-    SEMICOLON       reduce using rule 65 (unary -> NEG unary .)
-    RBRACK          reduce using rule 65 (unary -> NEG unary .)
-    RPAREN          reduce using rule 65 (unary -> NEG unary .)
-
-
-state 108
-
-    (67) factor -> LPAREN boolean . RPAREN
-
-    RPAREN          shift and go to state 125
-
-
-state 109
-
     (36) offset -> LBRACK boolean RBRACK . offset
     (36) offset -> . LBRACK boolean RBRACK offset
     (37) offset -> . empty
-    (73) empty -> .
+    (70) empty -> .
 
     LBRACK          shift and go to state 44
-    EQUALS          reduce using rule 73 (empty -> .)
-    TIMES           reduce using rule 73 (empty -> .)
-    DIVIDE          reduce using rule 73 (empty -> .)
-    PLUS            reduce using rule 73 (empty -> .)
-    MINUS           reduce using rule 73 (empty -> .)
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    DOT             reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
+    EQUALS          reduce using rule 70 (empty -> .)
+    TIMES           reduce using rule 70 (empty -> .)
+    DIVIDE          reduce using rule 70 (empty -> .)
+    PLUS            reduce using rule 70 (empty -> .)
+    MINUS           reduce using rule 70 (empty -> .)
+    EQ              reduce using rule 70 (empty -> .)
+    NEQ             reduce using rule 70 (empty -> .)
+    AND             reduce using rule 70 (empty -> .)
+    SEMICOLON       reduce using rule 70 (empty -> .)
+    OR              reduce using rule 70 (empty -> .)
+    RBRACK          reduce using rule 70 (empty -> .)
+    DOT             reduce using rule 70 (empty -> .)
+    RPAREN          reduce using rule 70 (empty -> .)
 
-    offset                         shift and go to state 126
-    empty                          shift and go to state 127
+    offset                         shift and go to state 118
+    empty                          shift and go to state 119
 
-state 110
+state 103
 
     (38) field -> DOT factor field .
 
@@ -2266,21 +2233,17 @@ state 110
     DIVIDE          reduce using rule 38 (field -> DOT factor field .)
     PLUS            reduce using rule 38 (field -> DOT factor field .)
     MINUS           reduce using rule 38 (field -> DOT factor field .)
-    LT              reduce using rule 38 (field -> DOT factor field .)
-    LE              reduce using rule 38 (field -> DOT factor field .)
-    GT              reduce using rule 38 (field -> DOT factor field .)
-    GE              reduce using rule 38 (field -> DOT factor field .)
-    DOT             reduce using rule 38 (field -> DOT factor field .)
-    RPAREN          reduce using rule 38 (field -> DOT factor field .)
     EQ              reduce using rule 38 (field -> DOT factor field .)
     NEQ             reduce using rule 38 (field -> DOT factor field .)
     AND             reduce using rule 38 (field -> DOT factor field .)
-    OR              reduce using rule 38 (field -> DOT factor field .)
     SEMICOLON       reduce using rule 38 (field -> DOT factor field .)
+    OR              reduce using rule 38 (field -> DOT factor field .)
     RBRACK          reduce using rule 38 (field -> DOT factor field .)
+    DOT             reduce using rule 38 (field -> DOT factor field .)
+    RPAREN          reduce using rule 38 (field -> DOT factor field .)
 
 
-state 111
+state 104
 
     (26) conditional -> IF LPAREN boolean RPAREN . statement conditional_aux
     (16) statement -> . local EQUALS boolean SEMICOLON
@@ -2310,7 +2273,7 @@ state 111
     READ            shift and go to state 29
     LBRACE          shift and go to state 3
 
-    statement                      shift and go to state 128
+    statement                      shift and go to state 120
     local                          shift and go to state 15
     conditional                    shift and go to state 16
     while_loop                     shift and go to state 17
@@ -2319,7 +2282,7 @@ state 111
     read                           shift and go to state 21
     block                          shift and go to state 22
 
-state 112
+state 105
 
     (29) while_loop -> WHILE LPAREN boolean RPAREN . statement
     (16) statement -> . local EQUALS boolean SEMICOLON
@@ -2349,7 +2312,7 @@ state 112
     READ            shift and go to state 29
     LBRACE          shift and go to state 3
 
-    statement                      shift and go to state 129
+    statement                      shift and go to state 121
     local                          shift and go to state 15
     conditional                    shift and go to state 16
     while_loop                     shift and go to state 17
@@ -2358,255 +2321,218 @@ state 112
     read                           shift and go to state 21
     block                          shift and go to state 22
 
-state 113
+state 106
 
     (30) do_while_loop -> DO statement WHILE LPAREN . boolean RPAREN SEMICOLON
-    (40) boolean -> . join boolean_aux
-    (43) join -> . equality join_aux
-    (46) equality -> . relational equality_aux
-    (50) relational -> . expression relational_operator expression
-    (55) expression -> . term expression_aux
-    (60) term -> . unary term_aux
-    (64) unary -> . NOT unary
-    (65) unary -> . NEG unary
-    (66) unary -> . factor
-    (67) factor -> . LPAREN boolean RPAREN
-    (68) factor -> . local
-    (69) factor -> . NUMBER_INT
-    (70) factor -> . NUMBER_FLOAT
-    (71) factor -> . FALSE
-    (72) factor -> . TRUE
+    (40) boolean -> . join
+    (41) boolean -> . boolean OR join
+    (42) join -> . equality
+    (43) join -> . join AND equality
+    (44) equality -> . relational
+    (45) equality -> . equality EQ relational
+    (46) equality -> . equality NEQ relational
+    (47) relational -> . expression
+    (48) relational -> . relational_operator expression
+    (53) expression -> . term expression_aux
+    (49) relational_operator -> . LT
+    (50) relational_operator -> . LE
+    (51) relational_operator -> . GT
+    (52) relational_operator -> . GE
+    (58) term -> . unary
+    (59) term -> . term TIMES unary
+    (60) term -> . term DIVIDE unary
+    (61) unary -> . NOT unary
+    (62) unary -> . NEG unary
+    (63) unary -> . factor
+    (64) factor -> . LPAREN boolean RPAREN
+    (65) factor -> . local
+    (66) factor -> . NUMBER_INT
+    (67) factor -> . NUMBER_FLOAT
+    (68) factor -> . FALSE
+    (69) factor -> . TRUE
     (31) local -> . HASH ID local_aux
     (32) local -> . ID local_aux
 
-    NOT             shift and go to state 62
-    NEG             shift and go to state 63
-    LPAREN          shift and go to state 65
-    NUMBER_INT      shift and go to state 66
-    NUMBER_FLOAT    shift and go to state 67
-    FALSE           shift and go to state 68
-    TRUE            shift and go to state 69
+    LT              shift and go to state 62
+    LE              shift and go to state 63
+    GT              shift and go to state 64
+    GE              shift and go to state 65
+    NOT             shift and go to state 67
+    NEG             shift and go to state 68
+    LPAREN          shift and go to state 70
+    NUMBER_INT      shift and go to state 71
+    NUMBER_FLOAT    shift and go to state 72
+    FALSE           shift and go to state 73
+    TRUE            shift and go to state 74
     HASH            shift and go to state 23
     ID              shift and go to state 24
 
-    boolean                        shift and go to state 130
+    boolean                        shift and go to state 122
     join                           shift and go to state 56
     equality                       shift and go to state 57
     relational                     shift and go to state 58
     expression                     shift and go to state 59
-    term                           shift and go to state 60
-    unary                          shift and go to state 61
-    factor                         shift and go to state 64
+    relational_operator            shift and go to state 60
+    term                           shift and go to state 61
+    unary                          shift and go to state 66
+    factor                         shift and go to state 69
     local                          shift and go to state 54
 
-state 114
+state 107
 
     (24) print -> PRINT LPAREN boolean RPAREN . SEMICOLON
 
-    SEMICOLON       shift and go to state 131
+    SEMICOLON       shift and go to state 123
 
 
-state 115
+state 108
 
     (25) read -> READ LPAREN local RPAREN . SEMICOLON
 
-    SEMICOLON       shift and go to state 132
+    SEMICOLON       shift and go to state 124
 
 
-state 116
+state 109
 
     (9) dimensions -> LBRACK NUMBER_INT RBRACK dimensions .
 
     ID              reduce using rule 9 (dimensions -> LBRACK NUMBER_INT RBRACK dimensions .)
 
 
+state 110
+
+    (41) boolean -> boolean OR join .
+    (43) join -> join . AND equality
+
+    SEMICOLON       reduce using rule 41 (boolean -> boolean OR join .)
+    OR              reduce using rule 41 (boolean -> boolean OR join .)
+    RBRACK          reduce using rule 41 (boolean -> boolean OR join .)
+    RPAREN          reduce using rule 41 (boolean -> boolean OR join .)
+    AND             shift and go to state 88
+
+
+state 111
+
+    (43) join -> join AND equality .
+    (45) equality -> equality . EQ relational
+    (46) equality -> equality . NEQ relational
+
+    AND             reduce using rule 43 (join -> join AND equality .)
+    SEMICOLON       reduce using rule 43 (join -> join AND equality .)
+    OR              reduce using rule 43 (join -> join AND equality .)
+    RBRACK          reduce using rule 43 (join -> join AND equality .)
+    RPAREN          reduce using rule 43 (join -> join AND equality .)
+    EQ              shift and go to state 89
+    NEQ             shift and go to state 90
+
+
+state 112
+
+    (45) equality -> equality EQ relational .
+
+    EQ              reduce using rule 45 (equality -> equality EQ relational .)
+    NEQ             reduce using rule 45 (equality -> equality EQ relational .)
+    AND             reduce using rule 45 (equality -> equality EQ relational .)
+    SEMICOLON       reduce using rule 45 (equality -> equality EQ relational .)
+    OR              reduce using rule 45 (equality -> equality EQ relational .)
+    RBRACK          reduce using rule 45 (equality -> equality EQ relational .)
+    RPAREN          reduce using rule 45 (equality -> equality EQ relational .)
+
+
+state 113
+
+    (46) equality -> equality NEQ relational .
+
+    EQ              reduce using rule 46 (equality -> equality NEQ relational .)
+    NEQ             reduce using rule 46 (equality -> equality NEQ relational .)
+    AND             reduce using rule 46 (equality -> equality NEQ relational .)
+    SEMICOLON       reduce using rule 46 (equality -> equality NEQ relational .)
+    OR              reduce using rule 46 (equality -> equality NEQ relational .)
+    RBRACK          reduce using rule 46 (equality -> equality NEQ relational .)
+    RPAREN          reduce using rule 46 (equality -> equality NEQ relational .)
+
+
+state 114
+
+    (59) term -> term TIMES unary .
+
+    TIMES           reduce using rule 59 (term -> term TIMES unary .)
+    DIVIDE          reduce using rule 59 (term -> term TIMES unary .)
+    PLUS            reduce using rule 59 (term -> term TIMES unary .)
+    MINUS           reduce using rule 59 (term -> term TIMES unary .)
+    EQ              reduce using rule 59 (term -> term TIMES unary .)
+    NEQ             reduce using rule 59 (term -> term TIMES unary .)
+    AND             reduce using rule 59 (term -> term TIMES unary .)
+    SEMICOLON       reduce using rule 59 (term -> term TIMES unary .)
+    OR              reduce using rule 59 (term -> term TIMES unary .)
+    RBRACK          reduce using rule 59 (term -> term TIMES unary .)
+    RPAREN          reduce using rule 59 (term -> term TIMES unary .)
+
+
+state 115
+
+    (60) term -> term DIVIDE unary .
+
+    TIMES           reduce using rule 60 (term -> term DIVIDE unary .)
+    DIVIDE          reduce using rule 60 (term -> term DIVIDE unary .)
+    PLUS            reduce using rule 60 (term -> term DIVIDE unary .)
+    MINUS           reduce using rule 60 (term -> term DIVIDE unary .)
+    EQ              reduce using rule 60 (term -> term DIVIDE unary .)
+    NEQ             reduce using rule 60 (term -> term DIVIDE unary .)
+    AND             reduce using rule 60 (term -> term DIVIDE unary .)
+    SEMICOLON       reduce using rule 60 (term -> term DIVIDE unary .)
+    OR              reduce using rule 60 (term -> term DIVIDE unary .)
+    RBRACK          reduce using rule 60 (term -> term DIVIDE unary .)
+    RPAREN          reduce using rule 60 (term -> term DIVIDE unary .)
+
+
+state 116
+
+    (54) expression_aux -> expression_operator term . expression_aux
+    (59) term -> term . TIMES unary
+    (60) term -> term . DIVIDE unary
+    (54) expression_aux -> . expression_operator term expression_aux
+    (55) expression_aux -> . empty
+    (56) expression_operator -> . PLUS
+    (57) expression_operator -> . MINUS
+    (70) empty -> .
+
+    TIMES           shift and go to state 93
+    DIVIDE          shift and go to state 94
+    PLUS            shift and go to state 97
+    MINUS           shift and go to state 98
+    EQ              reduce using rule 70 (empty -> .)
+    NEQ             reduce using rule 70 (empty -> .)
+    AND             reduce using rule 70 (empty -> .)
+    SEMICOLON       reduce using rule 70 (empty -> .)
+    OR              reduce using rule 70 (empty -> .)
+    RBRACK          reduce using rule 70 (empty -> .)
+    RPAREN          reduce using rule 70 (empty -> .)
+
+    expression_operator            shift and go to state 95
+    expression_aux                 shift and go to state 125
+    empty                          shift and go to state 96
+
 state 117
 
-    (41) boolean_aux -> OR join . boolean_aux
-    (41) boolean_aux -> . OR join boolean_aux
-    (42) boolean_aux -> . empty
-    (73) empty -> .
+    (64) factor -> LPAREN boolean RPAREN .
 
-    OR              shift and go to state 83
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
+    TIMES           reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    DIVIDE          reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    PLUS            reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    MINUS           reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    EQ              reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    NEQ             reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    AND             reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    SEMICOLON       reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    OR              reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    RBRACK          reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    EQUALS          reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    DOT             reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
+    RPAREN          reduce using rule 64 (factor -> LPAREN boolean RPAREN .)
 
-    boolean_aux                    shift and go to state 133
-    empty                          shift and go to state 84
 
 state 118
-
-    (44) join_aux -> AND equality . join_aux
-    (44) join_aux -> . AND equality join_aux
-    (45) join_aux -> . empty
-    (73) empty -> .
-
-    AND             shift and go to state 86
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-
-    join_aux                       shift and go to state 134
-    empty                          shift and go to state 87
-
-state 119
-
-    (47) equality_aux -> EQ relational . equality_aux
-    (47) equality_aux -> . EQ relational equality_aux
-    (48) equality_aux -> . NEQ relational equality_aux
-    (49) equality_aux -> . empty
-    (73) empty -> .
-
-    EQ              shift and go to state 89
-    NEQ             shift and go to state 90
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-
-    equality_aux                   shift and go to state 135
-    empty                          shift and go to state 91
-
-state 120
-
-    (48) equality_aux -> NEQ relational . equality_aux
-    (47) equality_aux -> . EQ relational equality_aux
-    (48) equality_aux -> . NEQ relational equality_aux
-    (49) equality_aux -> . empty
-    (73) empty -> .
-
-    EQ              shift and go to state 89
-    NEQ             shift and go to state 90
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-
-    equality_aux                   shift and go to state 136
-    empty                          shift and go to state 91
-
-state 121
-
-    (50) relational -> expression relational_operator expression .
-
-    EQ              reduce using rule 50 (relational -> expression relational_operator expression .)
-    NEQ             reduce using rule 50 (relational -> expression relational_operator expression .)
-    AND             reduce using rule 50 (relational -> expression relational_operator expression .)
-    OR              reduce using rule 50 (relational -> expression relational_operator expression .)
-    SEMICOLON       reduce using rule 50 (relational -> expression relational_operator expression .)
-    RBRACK          reduce using rule 50 (relational -> expression relational_operator expression .)
-    RPAREN          reduce using rule 50 (relational -> expression relational_operator expression .)
-
-
-state 122
-
-    (56) expression_aux -> expression_operator term . expression_aux
-    (56) expression_aux -> . expression_operator term expression_aux
-    (57) expression_aux -> . empty
-    (58) expression_operator -> . PLUS
-    (59) expression_operator -> . MINUS
-    (73) empty -> .
-
-    PLUS            shift and go to state 100
-    MINUS           shift and go to state 101
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-
-    expression_operator            shift and go to state 98
-    expression_aux                 shift and go to state 137
-    empty                          shift and go to state 99
-
-state 123
-
-    (61) term_aux -> TIMES unary . term_aux
-    (61) term_aux -> . TIMES unary term_aux
-    (62) term_aux -> . DIVIDE unary term_aux
-    (63) term_aux -> . empty
-    (73) empty -> .
-
-    TIMES           shift and go to state 103
-    DIVIDE          shift and go to state 104
-    PLUS            reduce using rule 73 (empty -> .)
-    MINUS           reduce using rule 73 (empty -> .)
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-
-    term_aux                       shift and go to state 138
-    empty                          shift and go to state 105
-
-state 124
-
-    (62) term_aux -> DIVIDE unary . term_aux
-    (61) term_aux -> . TIMES unary term_aux
-    (62) term_aux -> . DIVIDE unary term_aux
-    (63) term_aux -> . empty
-    (73) empty -> .
-
-    TIMES           shift and go to state 103
-    DIVIDE          shift and go to state 104
-    PLUS            reduce using rule 73 (empty -> .)
-    MINUS           reduce using rule 73 (empty -> .)
-    LT              reduce using rule 73 (empty -> .)
-    LE              reduce using rule 73 (empty -> .)
-    GT              reduce using rule 73 (empty -> .)
-    GE              reduce using rule 73 (empty -> .)
-    EQ              reduce using rule 73 (empty -> .)
-    NEQ             reduce using rule 73 (empty -> .)
-    AND             reduce using rule 73 (empty -> .)
-    OR              reduce using rule 73 (empty -> .)
-    SEMICOLON       reduce using rule 73 (empty -> .)
-    RBRACK          reduce using rule 73 (empty -> .)
-    RPAREN          reduce using rule 73 (empty -> .)
-
-    term_aux                       shift and go to state 139
-    empty                          shift and go to state 105
-
-state 125
-
-    (67) factor -> LPAREN boolean RPAREN .
-
-    TIMES           reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    DIVIDE          reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    PLUS            reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    MINUS           reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    LT              reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    LE              reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    GT              reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    GE              reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    EQUALS          reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    DOT             reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    RPAREN          reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    EQ              reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    NEQ             reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    AND             reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    OR              reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    SEMICOLON       reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-    RBRACK          reduce using rule 67 (factor -> LPAREN boolean RPAREN .)
-
-
-state 126
 
     (36) offset -> LBRACK boolean RBRACK offset .
 
@@ -2615,21 +2541,17 @@ state 126
     DIVIDE          reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     PLUS            reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     MINUS           reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    LT              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    LE              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    GT              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    GE              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    DOT             reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    RPAREN          reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     EQ              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     NEQ             reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     AND             reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
-    OR              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     SEMICOLON       reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
+    OR              reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
     RBRACK          reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
+    DOT             reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
+    RPAREN          reduce using rule 36 (offset -> LBRACK boolean RBRACK offset .)
 
 
-state 127
+state 119
 
     (37) offset -> empty .
 
@@ -2638,46 +2560,42 @@ state 127
     DIVIDE          reduce using rule 37 (offset -> empty .)
     PLUS            reduce using rule 37 (offset -> empty .)
     MINUS           reduce using rule 37 (offset -> empty .)
-    LT              reduce using rule 37 (offset -> empty .)
-    LE              reduce using rule 37 (offset -> empty .)
-    GT              reduce using rule 37 (offset -> empty .)
-    GE              reduce using rule 37 (offset -> empty .)
-    DOT             reduce using rule 37 (offset -> empty .)
-    RPAREN          reduce using rule 37 (offset -> empty .)
     EQ              reduce using rule 37 (offset -> empty .)
     NEQ             reduce using rule 37 (offset -> empty .)
     AND             reduce using rule 37 (offset -> empty .)
-    OR              reduce using rule 37 (offset -> empty .)
     SEMICOLON       reduce using rule 37 (offset -> empty .)
+    OR              reduce using rule 37 (offset -> empty .)
     RBRACK          reduce using rule 37 (offset -> empty .)
+    DOT             reduce using rule 37 (offset -> empty .)
+    RPAREN          reduce using rule 37 (offset -> empty .)
 
 
-state 128
+state 120
 
     (26) conditional -> IF LPAREN boolean RPAREN statement . conditional_aux
     (27) conditional_aux -> . ELSE statement
     (28) conditional_aux -> . empty
-    (73) empty -> .
+    (70) empty -> .
 
   ! shift/reduce conflict for ELSE resolved as shift
-    ELSE            shift and go to state 141
-    BREAK           reduce using rule 73 (empty -> .)
-    HASH            reduce using rule 73 (empty -> .)
-    ID              reduce using rule 73 (empty -> .)
-    IF              reduce using rule 73 (empty -> .)
-    WHILE           reduce using rule 73 (empty -> .)
-    DO              reduce using rule 73 (empty -> .)
-    PRINT           reduce using rule 73 (empty -> .)
-    READ            reduce using rule 73 (empty -> .)
-    LBRACE          reduce using rule 73 (empty -> .)
-    RBRACE          reduce using rule 73 (empty -> .)
+    ELSE            shift and go to state 127
+    BREAK           reduce using rule 70 (empty -> .)
+    HASH            reduce using rule 70 (empty -> .)
+    ID              reduce using rule 70 (empty -> .)
+    IF              reduce using rule 70 (empty -> .)
+    WHILE           reduce using rule 70 (empty -> .)
+    DO              reduce using rule 70 (empty -> .)
+    PRINT           reduce using rule 70 (empty -> .)
+    READ            reduce using rule 70 (empty -> .)
+    LBRACE          reduce using rule 70 (empty -> .)
+    RBRACE          reduce using rule 70 (empty -> .)
 
-  ! ELSE            [ reduce using rule 73 (empty -> .) ]
+  ! ELSE            [ reduce using rule 70 (empty -> .) ]
 
-    conditional_aux                shift and go to state 140
-    empty                          shift and go to state 142
+    conditional_aux                shift and go to state 126
+    empty                          shift and go to state 128
 
-state 129
+state 121
 
     (29) while_loop -> WHILE LPAREN boolean RPAREN statement .
 
@@ -2694,14 +2612,16 @@ state 129
     ELSE            reduce using rule 29 (while_loop -> WHILE LPAREN boolean RPAREN statement .)
 
 
-state 130
+state 122
 
     (30) do_while_loop -> DO statement WHILE LPAREN boolean . RPAREN SEMICOLON
+    (41) boolean -> boolean . OR join
 
-    RPAREN          shift and go to state 143
+    RPAREN          shift and go to state 129
+    OR              shift and go to state 87
 
 
-state 131
+state 123
 
     (24) print -> PRINT LPAREN boolean RPAREN SEMICOLON .
 
@@ -2718,7 +2638,7 @@ state 131
     ELSE            reduce using rule 24 (print -> PRINT LPAREN boolean RPAREN SEMICOLON .)
 
 
-state 132
+state 124
 
     (25) read -> READ LPAREN local RPAREN SEMICOLON .
 
@@ -2735,103 +2655,20 @@ state 132
     ELSE            reduce using rule 25 (read -> READ LPAREN local RPAREN SEMICOLON .)
 
 
-state 133
+state 125
 
-    (41) boolean_aux -> OR join boolean_aux .
+    (54) expression_aux -> expression_operator term expression_aux .
 
-    SEMICOLON       reduce using rule 41 (boolean_aux -> OR join boolean_aux .)
-    RBRACK          reduce using rule 41 (boolean_aux -> OR join boolean_aux .)
-    RPAREN          reduce using rule 41 (boolean_aux -> OR join boolean_aux .)
-
-
-state 134
-
-    (44) join_aux -> AND equality join_aux .
-
-    OR              reduce using rule 44 (join_aux -> AND equality join_aux .)
-    SEMICOLON       reduce using rule 44 (join_aux -> AND equality join_aux .)
-    RBRACK          reduce using rule 44 (join_aux -> AND equality join_aux .)
-    RPAREN          reduce using rule 44 (join_aux -> AND equality join_aux .)
+    EQ              reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
+    NEQ             reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
+    AND             reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
+    SEMICOLON       reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
+    OR              reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
+    RBRACK          reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
+    RPAREN          reduce using rule 54 (expression_aux -> expression_operator term expression_aux .)
 
 
-state 135
-
-    (47) equality_aux -> EQ relational equality_aux .
-
-    AND             reduce using rule 47 (equality_aux -> EQ relational equality_aux .)
-    OR              reduce using rule 47 (equality_aux -> EQ relational equality_aux .)
-    SEMICOLON       reduce using rule 47 (equality_aux -> EQ relational equality_aux .)
-    RBRACK          reduce using rule 47 (equality_aux -> EQ relational equality_aux .)
-    RPAREN          reduce using rule 47 (equality_aux -> EQ relational equality_aux .)
-
-
-state 136
-
-    (48) equality_aux -> NEQ relational equality_aux .
-
-    AND             reduce using rule 48 (equality_aux -> NEQ relational equality_aux .)
-    OR              reduce using rule 48 (equality_aux -> NEQ relational equality_aux .)
-    SEMICOLON       reduce using rule 48 (equality_aux -> NEQ relational equality_aux .)
-    RBRACK          reduce using rule 48 (equality_aux -> NEQ relational equality_aux .)
-    RPAREN          reduce using rule 48 (equality_aux -> NEQ relational equality_aux .)
-
-
-state 137
-
-    (56) expression_aux -> expression_operator term expression_aux .
-
-    LT              reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    LE              reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    GT              reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    GE              reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    EQ              reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    NEQ             reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    AND             reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    OR              reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    SEMICOLON       reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    RBRACK          reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-    RPAREN          reduce using rule 56 (expression_aux -> expression_operator term expression_aux .)
-
-
-state 138
-
-    (61) term_aux -> TIMES unary term_aux .
-
-    PLUS            reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    MINUS           reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    LT              reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    LE              reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    GT              reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    GE              reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    EQ              reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    NEQ             reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    AND             reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    OR              reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    SEMICOLON       reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    RBRACK          reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-    RPAREN          reduce using rule 61 (term_aux -> TIMES unary term_aux .)
-
-
-state 139
-
-    (62) term_aux -> DIVIDE unary term_aux .
-
-    PLUS            reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    MINUS           reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    LT              reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    LE              reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    GT              reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    GE              reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    EQ              reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    NEQ             reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    AND             reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    OR              reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    SEMICOLON       reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    RBRACK          reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-    RPAREN          reduce using rule 62 (term_aux -> DIVIDE unary term_aux .)
-
-
-state 140
+state 126
 
     (26) conditional -> IF LPAREN boolean RPAREN statement conditional_aux .
 
@@ -2848,7 +2685,7 @@ state 140
     ELSE            reduce using rule 26 (conditional -> IF LPAREN boolean RPAREN statement conditional_aux .)
 
 
-state 141
+state 127
 
     (27) conditional_aux -> ELSE . statement
     (16) statement -> . local EQUALS boolean SEMICOLON
@@ -2878,7 +2715,7 @@ state 141
     READ            shift and go to state 29
     LBRACE          shift and go to state 3
 
-    statement                      shift and go to state 144
+    statement                      shift and go to state 130
     local                          shift and go to state 15
     conditional                    shift and go to state 16
     while_loop                     shift and go to state 17
@@ -2887,7 +2724,7 @@ state 141
     read                           shift and go to state 21
     block                          shift and go to state 22
 
-state 142
+state 128
 
     (28) conditional_aux -> empty .
 
@@ -2904,14 +2741,14 @@ state 142
     RBRACE          reduce using rule 28 (conditional_aux -> empty .)
 
 
-state 143
+state 129
 
     (30) do_while_loop -> DO statement WHILE LPAREN boolean RPAREN . SEMICOLON
 
-    SEMICOLON       shift and go to state 145
+    SEMICOLON       shift and go to state 131
 
 
-state 144
+state 130
 
     (27) conditional_aux -> ELSE statement .
 
@@ -2928,7 +2765,7 @@ state 144
     RBRACE          reduce using rule 27 (conditional_aux -> ELSE statement .)
 
 
-state 145
+state 131
 
     (30) do_while_loop -> DO statement WHILE LPAREN boolean RPAREN SEMICOLON .
 
@@ -2949,7 +2786,7 @@ WARNING: Conflicts:
 WARNING: 
 WARNING: shift/reduce conflict for DOT in state 24 resolved as shift
 WARNING: shift/reduce conflict for DOT in state 39 resolved as shift
-WARNING: shift/reduce conflict for DOT in state 72 resolved as shift
-WARNING: shift/reduce conflict for ELSE in state 128 resolved as shift
+WARNING: shift/reduce conflict for DOT in state 77 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 120 resolved as shift
 WARNING: reduce/reduce conflict in state 43 resolved using rule (local_aux -> empty)
 WARNING: rejected rule (offset -> empty) in state 43

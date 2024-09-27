@@ -174,7 +174,7 @@ def p_statements(p):
     '''statements : statement statements
                   | empty'''
     if len(p) == 3:
-        p[0] = ([p[1]], p[2])
+        p[0] = (p[1], p[2])
     else:
         p[0] = None
 
@@ -225,17 +225,20 @@ def p_do_while_loop(p):
     p[0] = ('do', p[2], 'while', p[5])
 
 def p_local(p):
-    '''local : HASH ID local_aux
-             | ID local_aux'''
+    '''local : ID
+             | HASH ID
+             | ID local_aux
+             | HASH ID local_aux'''
     if len(p) == 4:
         p[0] = (p[1], p[2], p[3])
-    else:
+    elif len(p) == 3:
         p[0] = (p[1], p[2])
+    else:
+        p[0] = p[1]
 
 def p_local_aux(p):
     '''local_aux : offset
-                   | field
-                   | empty'''
+                 | field'''
     p[0] = p[1]
 
 def p_offset(p):
@@ -293,18 +296,14 @@ def p_relational_operator(p):
                            | GT
                            | GE'''
     p[0] = p[1]
-  
-def p_expression(p):
-    '''expression : term expression_aux''' 
-    p[0] = (p[1], p[2])
 
-def p_expression_aux(p):
-    '''expression_aux : expression_operator term expression_aux
-                      | empty'''
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = None 
+def p_expression(p):
+    '''expression : term 
+                | expression expression_operator term'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else: 
+        p[0] = (p[2], p[1], p[3]) 
 
 def p_expression_operator(p):
     '''expression_operator : PLUS
